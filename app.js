@@ -4,6 +4,7 @@ const bodyParser        = require('body-parser');
 
 const login             = require('./controllers/home');
 const registration      = require('./controllers/home');
+const admin      		= require('./controllers/admin/home');
 
 
 const app               = express();
@@ -22,6 +23,7 @@ app.use(expressSession({ secret: 'secrete value', saveUninitialized: true, resav
 
 app.use('/home', login);
 app.use('/home', registration);
+app.use('/admin', admin);
 
 
 app.get('/', (req, res) => {
