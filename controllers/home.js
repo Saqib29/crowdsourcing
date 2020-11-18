@@ -4,17 +4,23 @@ const router            = express.Router();
 
 // login
 router.get('/login', (req, res) => {
-    req.session.user = {
-        id        : '',
-        full_name : '',
-        username  : '',
-        password  : '',
-        email     : '',
-        contact   : '',
-        address   : '',
-        user_roll : ''
-    };
-    res.render('home/login');
+    // req.session.user = null;
+
+    if(req.session.user != null) {
+        if(req.session.user.user_roll.toLowerCase() == 'admin') {
+            res.redirect('/admin/adminController');
+        } 
+        else if(req.session.user.user_roll.toLowerCase() == 'buyer') {
+            res.redirect('/buyer/buyerController');
+        } 
+        else if (req.session.user.user_roll.toLowerCase() == 'seller') {
+            res.redirect('/seller/sellerController');
+        }
+    } 
+    else {
+        res.render('home/login');
+    }
+
 });
 
 router.post('/login', (req, res) => {
@@ -26,7 +32,9 @@ router.post('/login', (req, res) => {
     // validatting if the person existed on database
     main_controll.validate(user, (status) => {
 
+        // if user exist in database, go ahead
         if(status) {
+            
             // getting logined persons basic informations
             main_controll.get_user(user, (result) => {
 
@@ -45,9 +53,11 @@ router.post('/login', (req, res) => {
                 // checking if the user admin or buyer or seller
                 if(result[0].user_roll.toLowerCase() == 'admin') {
                     res.redirect('/admin/adminController');
-                } else if(result[0].user_roll.toLowerCase() == 'buyer') {
+                } 
+                else if(result[0].user_roll.toLowerCase() == 'buyer') {
                     res.redirect('/buyer/buyerController');
-                } else if (result[0].user_roll.toLowerCase() == 'seller') {
+                } 
+                else if (result[0].user_roll.toLowerCase() == 'seller') {
                     res.redirect('/seller/sellerController');
                 }
 
