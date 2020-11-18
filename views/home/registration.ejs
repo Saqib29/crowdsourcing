@@ -8,14 +8,20 @@
 </head>
 <body>
     <div class="register-page">
+      
         <div class="form">
-          <form class="register-form">
-            <input type="text" name="fullname" placeholder="Full Name"/>
+          <h2 style="color: #595955;">Registration</h2>
+          <form class="register-form" method="POST" action="">
+            <input type="text" name="full_name" placeholder="Full Name"/>
 
             <input type="text" name="username" placeholder="username"/>
             <input type="password" name="password" placeholder="password"/>
             <input type="password" name="repassword" placeholder="retype-passowrd"/>
-            <input type="text" name="email" placeholder="email address"/>
+            <input type="email" name="email" placeholder="email address"/>
+            <input type="text" name="contact" placeholder="Contact No"/>
+            <input type="text" name="address" placeholder="Address"/>
+            <p style="text-align: left;">Register as:</p>
+            <input type="text" name="user_roll" placeholder="Buyer/Seller">
             <button>Register</button>
             <p class="message">Already registered? <a href="/home/login">Sign In</a></p>
           </form>
