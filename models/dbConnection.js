@@ -23,9 +23,9 @@ var getConnection = function(callback){
 
 
 module.exports = {
-	getResults: function (sql, callback){
+	getResults: function (sql, params, callback){
 		getConnection(function(connection){
-			connection.query(sql , function (error, results) {
+			connection.query(sql, params, function (error, results) {
 				callback(results);
 			});
 			
@@ -35,9 +35,9 @@ module.exports = {
 		});
 
 	},
-	execute: function (sql, callback){
+	execute: function (sql, params, callback){
 		getConnection(function(connection){
-			connection.query(sql , function (error, status) {
+			connection.query(sql, params, function (error, status) {
 				
 				if(status){
 					callback(true);
