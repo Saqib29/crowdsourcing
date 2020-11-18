@@ -27,7 +27,7 @@ router.post('/registration', (req, res) => {
         email:      req.body.email,
         contact:    req.body.contact,
         address:    req.body.address,
-        user_roll:  req.body.user_roll
+        user_roll:  req.body.user_roll.toLowerCase()
     }
     console.log(user);
 });
