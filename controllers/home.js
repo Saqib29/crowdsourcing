@@ -99,4 +99,10 @@ router.post('/registration', (req, res) => {
     }
 });
 
+// logout
+router.get('/logout', (req, res) => {
+    res.session.user = null;
+    res.redirect('/home/login');
+});
+
 module.exports = router;
