@@ -17,6 +17,12 @@ module.exports = {
             callback(result);
         });
     },
+    getById: (id, callback) => {
+        var sql = `SELECT * FROM user WHERE id = ${id}`;
+        db.getResults(sql, null, (result) => {
+            callback(result);
+        });
+    },
     insert: (user, callback) => {
         var sql = `INSERT INTO user (full_name, username, password, email, contact, address, user_roll) VALUES (?, ?, ?, ?, ?, ?, ?)`;
         var data = [user.full_name, user.username, user.password, user.email, user.contact, user.address, user.user_roll];
