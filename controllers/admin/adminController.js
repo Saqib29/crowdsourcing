@@ -42,9 +42,19 @@ router.get('/addCategories', (req, res) => {
 	res.render('admin/addCategories');
 });
 
+// Operation
 
+router.get('/admilist', (req, res) => {
+	
+});
 
+router.get('/buyerlist', (req, res) => {
 
+});
+
+router.get('/sellerlist', (req, res) => {
+	
+});
 
 
 
