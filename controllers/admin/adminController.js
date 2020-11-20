@@ -15,4 +15,10 @@ router.get('/adminController', (req, res)=>{
 	res.render('admin/index');
 	
 });
+
+router.get('/logout', (req, res) => {
+	req.session.user = null;
+	res.redirect('home/login');
+});
+
 module.exports = router;
