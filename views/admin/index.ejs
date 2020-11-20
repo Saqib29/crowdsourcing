@@ -23,7 +23,7 @@
                         <a href=""><i class="fas fa-user-circle"><%= uname %></i></a>
 
                         <ul>
-                            <li><a href=""><i class="fas fa-user"></i> Profile</a></li>
+                            <li><a href="/admin/profile"><i class="fas fa-user"></i> Profile</a></li>
                             <li><a href=""><i class="fas fa-redo"></i> Reset Password</a></li>
                             <li ><a href="" class="logout"><i class="fas fa-power-off"></i>  Logout</a></li>
                         </ul>
@@ -34,26 +34,31 @@
         
         <div class="sidebar"> 
             <ul>
-                <li><a href=""><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-                <li><a href=""><i class="fas fa-address-card"></i>Profile</a></li>
-
-                <li><a href=""><i class="fas fa-user-plus"></i>Add People</a>
+                
+                <li><a href="/admin/profile"><i class="fas fa-address-card"></i>Profile</a></li>
+                
+                <li><a href="/admin/Categories"><i class="fas fa-user-plus"></i>Categories</a>
                     <ul>
-                        <li><a href=""><i class="fas fa-user-shield"></i>Admin</a></li> 
+                        <li><a href="/admin/addCategories"><i class="fas fa-user-shield"></i>Add Categories</a></li> 
+                    </ul>
+                </li>
+
+                <li><a href="/admin/addAdmin"><i class="fas fa-user-plus"></i>Add People</a>
+                    <ul>
+                        <li><a href="/admin/addAdmin"><i class="fas fa-user-shield"></i>Admin</a></li> 
                     </ul>
                 </li>
 
                 <li><a href="#"><i class="fas fa-cogs"></i>Operation</a>
             
                 <ul>
-                    <li><a href=""><i class="fas fa-user-shield"></i>Admin</a></li>  
-                    <li><a href=""><i class="fas fa-user-md"></i>Buyer</a></li>
-                    <li><a href=""><i class="fas fa-id-badge"></i>Seller</a></li>              
+                    <li><a href="/admin/adminlist"><i class="fas fa-user-shield"></i>Admin</a></li>  
+                    <li><a href="/admin/buyerlist"><i class="fas fa-user-md"></i>Buyer</a></li>
+                    <li><a href="/admin/sellerlist"><i class="fas fa-id-badge"></i>Seller</a></li>              
                 </ul>
             
                 </li>
             
-                <li><a href="#"><i class="fas fa-address-book"></i>Contact</a></li>
                 <li><a href="/admin/logout"><i class="fas fa-sign-out-alt"></i>Log Out</a></li>
             </ul> 
 
