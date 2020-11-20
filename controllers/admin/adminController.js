@@ -29,11 +29,19 @@ router.get('/addAdmin', (req, res) => {
 	res.render('admin/addAdmin');
 });
 
+// Categories
+router.get('/Categories', (req, res) => {
+	// will be searched to the categories table
+	// and show categories
+	res.send('categories will be shown');
+});
+
 
 // add Categories
 router.get('/addCategories', (req, res) => {
 	res.render('admin/addCategories');
 });
+
 
 
 
