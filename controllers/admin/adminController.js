@@ -44,16 +44,22 @@ router.get('/addCategories', (req, res) => {
 
 // Operation
 
-router.get('/admilist', (req, res) => {
-	
+router.get('/adminlist', (req, res) => {
+	main_controll.get_all_admin((results) => {
+		console.log(results);
+	});
 });
 
 router.get('/buyerlist', (req, res) => {
-
+	main_controll.get_all_buyer((results) => {
+		console.log(results);
+	});
 });
 
 router.get('/sellerlist', (req, res) => {
-	
+	main_controll.get_all_seller((results) => {
+		console.log(results);
+	});
 });
 
 

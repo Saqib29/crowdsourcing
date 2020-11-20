@@ -24,19 +24,19 @@ module.exports = {
         });
     },
     get_all_admin: (callback) => {
-        var sql = `SELECT * FROM user WHERE user_roll = admin`;
+        var sql = `SELECT * FROM user WHERE user_roll = 'admin'`;
         db.getResults(sql, null, (results) => {
             callback(results);
         });
     },
     get_all_buyer: (callback) => {
-        var sql = `SELECT * FROM user WHERE user_roll = buyer`;
+        var sql = `SELECT * FROM user WHERE user_roll = 'buyer'`;
         db.getResults(sql, null, (results) => {
             callback(results);
         });
     },
     get_all_seller: (callback) => {
-        var sql = `SELECT * FROM user WHERE user_roll = seller`;
+        var sql = `SELECT * FROM user WHERE user_roll = 'seller'`;
         db.getResults(sql, null, (results) => {
             callback(results);
         });
