@@ -24,6 +24,23 @@ router.get('/profile', (req, res) => {
 	});
 });
 
+// Add People
+router.get('/addAdmin', (req, res) => {
+	res.render('admin/addAdmin');
+});
+
+
+// add Categories
+router.get('/addCategories', (req, res) => {
+	res.render('admin/addCategories');
+});
+
+
+
+
+
+
+
 router.get('/logout', (req, res) => {
 	req.session.user = null;
 	res.redirect('home/login');
