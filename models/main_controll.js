@@ -23,6 +23,24 @@ module.exports = {
             callback(result);
         });
     },
+    get_all_admin: (callback) => {
+        var sql = `SELECT * FROM user WHERE user_roll = admin`;
+        db.getResults(sql, null, (results) => {
+            callback(results);
+        });
+    },
+    get_all_buyer: (callback) => {
+        var sql = `SELECT * FROM user WHERE user_roll = buyer`;
+        db.getResults(sql, null, (results) => {
+            callback(results);
+        });
+    },
+    get_all_seller: (callback) => {
+        var sql = `SELECT * FROM user WHERE user_roll = seller`;
+        db.getResults(sql, null, (results) => {
+            callback(results);
+        });
+    },
     insert: (user, callback) => {
         var sql = `INSERT INTO user (full_name, username, password, email, contact, address, user_roll) VALUES (?, ?, ?, ?, ?, ?, ?)`;
         var data = [user.full_name, user.username, user.password, user.email, user.contact, user.address, user.user_roll];
