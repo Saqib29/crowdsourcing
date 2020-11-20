@@ -12,7 +12,11 @@ router.get('*', (req, res, next) => {
 
 router.get('/adminController', (req, res)=>{
 	
-	res.render('admin/index');
+	var user =   req.session.user;
+
+	res.render('admin/index', {
+		uname: user.username
+	});
 	
 });
 
