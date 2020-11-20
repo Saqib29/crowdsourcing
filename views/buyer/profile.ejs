@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Profile</title>
+	<link rel="stylesheet" type="text/css" href="/abc/css/style.css">
+</head>
+<body>
+	<form method="post">
+		<fieldset>
+			<legend><h2>Profile</h2></legend>
+			<table>
+				<tr>
+					<td>ID</td>
+					<td><%=id%></td>
+				</tr>
+				<tr>
+					<td>Name</td>
+					<td><%=full_name%></td>
+				</tr>
+				<tr>
+					<td>Username</td>
+					<td><%=username%></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><%=password%></td>
+				</tr>
+				<tr>
+					<tr>
+					<td>Address</td>
+					<td><%=address%></td>
+				</tr>
+				<tr>
+					<td>Contact</td>
+					<td><%=contact%></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><%=email%></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+			<button><a href="edit_profile/<%=username %>">Edit</a></button>
+		</fieldset>
+		<br>
+		<br>
+
+</body>
+</html>

@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2020 at 08:36 PM
--- Server version: 10.3.15-MariaDB
--- PHP Version: 7.3.6
+-- Generation Time: Nov 20, 2020 at 10:33 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -21,6 +20,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `crowdsourcing`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `message`
+--
+
+CREATE TABLE `message` (
+  `username` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `receiver` varchar(100) NOT NULL,
+  `subject` varchar(500) NOT NULL,
+  `body` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`username`, `name`, `receiver`, `subject`, `body`) VALUES
+('jan', 'Jane Alam', 'fsafdas', '		fasfadsf			', '		sdafasfas			'),
+('jan', 'Jane Alam', 'gfdgsgt', '		r5tretre			', '		teytbvdgfd			');
 
 -- --------------------------------------------------------
 
@@ -45,7 +66,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `full_name`, `username`, `password`, `email`, `contact`, `address`, `user_roll`) VALUES
 (1, 'Aminul Islam Saqib', 'saqib', '123', 'saqib@email.com', '01821500050', 'Narayanganj', 'admin'),
-(2, 'Jane Alam', 'jan', '123', 'jan@email.com', '1444565242', 'Dhaka, Bangladesh', 'buyer'),
+(2, 'Al Zami Arafat', 'zami', '123', 'z@email.com', '634578349', 'Dhaka', 'buyer'),
 (3, 'ahnaf alam', 'ahnaf', '123', 'ahnaf@email.com', '456875212', 'Dhaka, Bangladesh', 'seller');
 
 --
