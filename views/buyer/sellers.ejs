@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sellers</title>
+</head>
+<body>
+	<h1>Seller List</h1><br>
+	<input type="text" name="search"><br><br>
+
+	
+
+	<table border="1">
+		<tr>
+			<td>ID</td>
+			<td>Name</td>
+			<td>Category</td>
+			<td>Buyer Name</td>
+			<td>Project Title</td>
+			<td>Action</td>
+
+
+		</tr>
+
+		<% 
+			sellers.forEach( function(s){ %>
+			<tr>
+				<td><%= s.user_id %></td>
+				<td><%= s.name %></td>
+				<td><%= s.category_name %></td>
+				<td><%= s.buyer_name %></td>
+				<td><%= s.project_title %></td>
+		
+				<td>
+					<a href="/buyer/message/<%=s.user_id%>">Message</a>
+
+				</td>
+			</tr>
+
+		<%
+			}); 
+		%>
+		
+	</table>
+	<br>
+</body>
+</html>

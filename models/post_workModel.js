@@ -11,5 +11,15 @@ module.exports = {
             }
         });
     },
+    getAll: (user_id,callback) => {
+        var sql = `Select * from post_table WHERE buyer_id=?`;
+        db.getResults(sql, [user_id.id], (results) => {
+            if(results.length > 0) {
+                callback(results);
+            } else {
+                callback(false);
+            }
+        });
+    },
 
 }

@@ -9,6 +9,7 @@ const buyer             = require('./controllers/buyer/buyerController');
 const seller            = require('./controllers/seller/sellerController');
 
 
+
 const app               = express();
 const port              = process.env.port || 3000;
 

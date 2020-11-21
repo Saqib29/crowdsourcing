@@ -1,7 +1,9 @@
 const express           = require('express');
 const msgModel			= require.main.require('./models/msgModel');
 const main_controll		= require.main.require('./models/main_controll');
-const post_workModel			= require.main.require('./models/post_workModel');
+const post_workModel	= require.main.require('./models/post_workModel');
+const sellersModel		= require.main.require('./models/sellersModel');
+
 
 const router            = express.Router();
 
@@ -23,19 +25,16 @@ router.get('/buyerController', (req, res) => {
 	};
 
 	msgModel.msgCount(username, function(status){
-		
-		// console.log(message_count.msg_count);
 
 		res.render('buyer/index', {
 			msg: status.length,
 			name: username
 		});
 		
-	});
-
-	
+	});	
 
 });
+
 
 router.get('/profile', (req, res) => {
 	var user =   req.session.user;
@@ -52,6 +51,7 @@ router.get('/profile', (req, res) => {
 	res.render('buyer/profile', profile);
 });
 
+
 router.get('/edit_profile/:username', (req, res) => {
 	var user =   req.session.user;
 	var profile = {
@@ -66,6 +66,7 @@ router.get('/edit_profile/:username', (req, res) => {
 
 	res.render('buyer/edit_profile', profile);
 });
+
 
 router.post('/edit_profile/:username', (req, res)=>{
 	var edit_profile = {
@@ -89,6 +90,7 @@ router.post('/edit_profile/:username', (req, res)=>{
 		
 	});
 });
+
 
 router.get('/message', (req, res) => {
 	var user =   req.session.user;
@@ -120,6 +122,43 @@ router.post('/message', (req, res)=>{
 	});
 });
 
+
+
+router.get('/message/:id', (req, res) => {
+
+	var user_id = {id: req.params.id};
+	var user =   req.session.user;
+
+	sellersModel.getById(user_id, function(status) {
+		res.render('buyer/seller_message', {fname: user.full_name, sender: status[0].name});
+	})
+	
+});
+
+
+router.post('/message/:id', (req, res)=>{
+	var user =   req.session.user;
+	var username= {
+		uname: user.username
+	};
+	var send_message = {
+		sender: req.body.sender,
+		receiver: req.body.receiver,
+		subject: req.body.subject,
+		body: req.body.body,
+	};
+
+	msgModel.send_message(username,send_message, function(status){
+		
+		if(status == false){
+			res.send('message send....');
+
+		}
+		
+	});
+});
+
+
 router.get('/post', (req, res) => {
 	var user =   req.session.user;
 
@@ -131,6 +170,9 @@ router.get('/post', (req, res) => {
 	res.render('buyer/post_work', username);
 
 });
+
+
+
 router.post('/post', (req, res) => {
 	var post = {
 		id: req.body.id,
@@ -147,6 +189,30 @@ router.post('/post', (req, res) => {
 
 		}
 
+	});
+
+});
+
+
+router.get('/post_list', (req, res) => {
+
+	var user =   req.session.user;
+
+	var user_id = {
+		id: user.id,
+	};
+	
+	post_workModel.getAll(user_id,function(status){
+		res.render('buyer/post_list', {posts: status});
+	});
+
+});
+
+
+router.get('/sellers', (req, res) => {
+	
+	sellersModel.getAll(function(status){
+		res.render('buyer/sellers', {sellers: status});
 	});
 
 });
