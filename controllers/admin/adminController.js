@@ -1,6 +1,7 @@
 const express 	= require('express');
 const main_controll     = require.main.require('./models/main_controll');
 const category	 		= require.main.require('./models/category');
+const operation 		= require.main.require('./models/admioperation');
 const router 			= express.Router();
 
 router.get('*', (req, res, next) => {
@@ -108,7 +109,14 @@ router.get('/adminlist', (req, res) => {
 	});
 });
 router.get('/adminlist/delete/:id', (req, res) => {
-	console.log(req.params.id);
+	operation.delete_admin(req.params.id, (status) => {
+		if(status) {
+			res.redirect('/admin/adminlist');
+		} else {
+			res.redirect('/admin/adminlist');
+		}
+	});
+	// console.log(req.params.id);
 });
 
 router.get('/buyerlist', (req, res) => {
@@ -118,7 +126,14 @@ router.get('/buyerlist', (req, res) => {
 	});
 });
 router.get('/buyerlist/delete/:id', (req, res) => {
-	console.log(req.params.id);
+	operation.delete_buyer(req.params.id, (status) => {
+		if(status) {
+			res.redirect('/admin/buyerlist');
+		} else {
+			res.redirect('/admin/buyerlist');
+		}
+	});
+	// console.log(req.params.id);
 });
 
 router.get('/sellerlist', (req, res) => {
@@ -128,7 +143,14 @@ router.get('/sellerlist', (req, res) => {
 	});
 });
 router.get('/sellerlist/delete/:id', (req, res) => {
-	console.log(req.params.id);
+	operation.delete_seller(req.params.id, (status) => {
+		if(status) {
+			res.redirect('/admin/sellerlist');
+		} else {
+			res.redirect('/admin/sellerlist');
+		}
+	});
+	// console.log(req.params.id);
 });
 
 // reset password
