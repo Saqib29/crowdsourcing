@@ -16,9 +16,25 @@ router.get('*', (req, res, next) => {
 router.get('/buyerController', (req, res) => {
 	var user =   req.session.user;
 
-	res.render('buyer/index', {
+	var username = {
+		name: user.full_name,
 		uname: user.username
+	};
+
+	msgModel.msgCount(username, function(status){
+		
+		var message_count ={
+			msg_count: status.length
+		};
+		console.log(message_count);
+
+		res.render('buyer/index', username,{
+			msg_count: status.length });
+		
 	});
+
+	
+
 });
 
 router.get('/profile', (req, res) => {
