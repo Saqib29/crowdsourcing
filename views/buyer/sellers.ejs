@@ -3,9 +3,10 @@
 <head>
 	<title>Sellers</title>
 </head>
-<body>
+<body style="background-color: #BCD6CA">
 	<h1>Seller List</h1><br>
-	<input type="text" name="search"><br><br>
+	<input type="text" name="search" placeholder="search by category">
+	<a href="" ><button>Search</button></a><br><br>
 
 	
 
@@ -31,7 +32,7 @@
 				<td><%= s.project_title %></td>
 		
 				<td>
-					<a href="/buyer/message/<%=s.user_id%>">Message</a>
+					<a href="/buyer/message/<%=s.user_id%>"><button style="background-color: green;">Message</button></a>
 
 				</td>
 			</tr>
@@ -42,5 +43,6 @@
 		
 	</table>
 	<br>
+	<a href="/buyer/buyerController"><button style="background-color: #5AA9D6">Back</button></a>
 </body>
 </html>

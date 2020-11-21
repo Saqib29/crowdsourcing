@@ -120,9 +120,9 @@ router.post('/message', (req, res)=>{
 		//console.log(status);
 		
 		if(status == false){
-			res.send('message send....');
-
+			res.redirect('/buyer');
 		}
+
 		
 	});
 });
@@ -156,7 +156,7 @@ router.post('/message/:id', (req, res)=>{
 	msgModel.send_message(username,send_message, function(status){
 		
 		if(status == false){
-			res.send('message send....');
+			res.redirect('/buyer/buyerController');
 		}
 		
 	});
@@ -199,9 +199,11 @@ router.post('/edit_post/:id', (req, res) => {
 
 	post_workModel.postUpdate(post_id,post, function (status) {
 
-		console.log(status);
-		
-		res.render('buyer/edit_post', {edit_post: status});
+		if(status == false){
+			/*res.send('post updated....');*/
+			res.redirect('/buyer/post_list');
+
+		}	
 	});
 });
 
@@ -223,6 +225,32 @@ router.post('/post', (req, res) => {
 
 	});
 
+});
+
+router.get('/delete/:id', (req, res) => {
+	
+	var post_id = {id: req.params.id};
+
+	post_workModel.getByPostId(post_id, function (status) {
+		
+		res.render('buyer/delete_post', {delete_post: status});
+	});
+});
+
+
+router.post('/delete/:id', (req, res) => {
+	
+	var post_id = {id: req.params.id};
+
+	post_workModel.postDelete(post_id, function (status) {
+		console.log(status);
+
+		if(status == false){
+			/*res.send('post updated....');*/
+			res.redirect('/buyer/post_list');
+
+		}	
+	});
 });
 
 
