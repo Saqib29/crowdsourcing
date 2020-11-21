@@ -1,7 +1,9 @@
 const express           = require('express');
 const msgModel			= require.main.require('./models/msgModel');
 const main_controll		= require.main.require('./models/main_controll');
-const post_workModel			= require.main.require('./models/post_workModel');
+const post_workModel	= require.main.require('./models/post_workModel');
+const sellersModel		= require.main.require('./models/sellersModel');
+
 
 const router            = express.Router();
 
@@ -23,19 +25,19 @@ router.get('/buyerController', (req, res) => {
 	};
 
 	msgModel.msgCount(username, function(status){
-		
-		// console.log(message_count.msg_count);
 
 		res.render('buyer/index', {
 			msg: status.length,
 			name: username
 		});
 		
-	});
-
-	
+	});	
 
 });
+
+
+//         User Profile Controller >>>>>>>>>>>>>>>>>>>>>>
+
 
 router.get('/profile', (req, res) => {
 	var user =   req.session.user;
@@ -52,6 +54,7 @@ router.get('/profile', (req, res) => {
 	res.render('buyer/profile', profile);
 });
 
+
 router.get('/edit_profile/:username', (req, res) => {
 	var user =   req.session.user;
 	var profile = {
@@ -66,6 +69,7 @@ router.get('/edit_profile/:username', (req, res) => {
 
 	res.render('buyer/edit_profile', profile);
 });
+
 
 router.post('/edit_profile/:username', (req, res)=>{
 	var edit_profile = {
@@ -89,6 +93,9 @@ router.post('/edit_profile/:username', (req, res)=>{
 		
 	});
 });
+
+
+//      Message Controller >>>>>>>>>>>>>>>>>>>>>>>>>>
 
 router.get('/message', (req, res) => {
 	var user =   req.session.user;
@@ -120,6 +127,44 @@ router.post('/message', (req, res)=>{
 	});
 });
 
+
+
+router.get('/message/:id', (req, res) => {
+
+	var user_id = {id: req.params.id};
+	var user =   req.session.user;
+
+	sellersModel.getById(user_id, function(status) {
+		res.render('buyer/seller_message', {fname: user.full_name, sender: status[0].name});
+	})
+	
+});
+
+
+router.post('/message/:id', (req, res)=>{
+	var user =   req.session.user;
+	var username= {
+		uname: user.username
+	};
+	var send_message = {
+		sender: req.body.sender,
+		receiver: req.body.receiver,
+		subject: req.body.subject,
+		body: req.body.body,
+	};
+
+	msgModel.send_message(username,send_message, function(status){
+		
+		if(status == false){
+			res.send('message send....');
+		}
+		
+	});
+});
+
+
+//            POST Controller>>>>>>>>>>>>>>>>>>>>>>>
+
 router.get('/post', (req, res) => {
 	var user =   req.session.user;
 
@@ -131,6 +176,35 @@ router.get('/post', (req, res) => {
 	res.render('buyer/post_work', username);
 
 });
+
+router.get('/edit_post/:id', (req, res) => {
+	
+	var post_id = {id: req.params.id};
+
+	post_workModel.getByPostId(post_id, function (status) {
+		
+		res.render('buyer/edit_post', {edit_post: status});
+	});
+});
+
+router.post('/edit_post/:id', (req, res) => {
+	
+	var post_id = {id: req.params.id};
+	var post = {
+		title: req.body.title,
+		status: req.body.status,
+		post_body: req.body.post_body,
+		amount: req.body.amount
+	};
+
+	post_workModel.postUpdate(post_id,post, function (status) {
+
+		console.log(status);
+		
+		res.render('buyer/edit_post', {edit_post: status});
+	});
+});
+
 router.post('/post', (req, res) => {
 	var post = {
 		id: req.body.id,
@@ -150,6 +224,36 @@ router.post('/post', (req, res) => {
 	});
 
 });
+
+
+router.get('/post_list', (req, res) => {
+
+	var user =   req.session.user;
+
+	var user_id = {
+		id: user.id,
+	};
+	
+	post_workModel.getAll(user_id,function(status){
+		res.render('buyer/post_list', {posts: status});
+	});
+
+});
+
+
+//     Seller Controller >>>>>>>>>>>>>>>>>>>>>
+
+router.get('/sellers', (req, res) => {
+	
+	sellersModel.getAll(function(status){
+		res.render('buyer/sellers', {sellers: status});
+	});
+
+});
+
+
+//       Logout Controller >>>>>>>>>>>>>>>>
+
 
 router.get('/logout', (req, res) => {
 	req.session.user = null;

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Post</title>
+</head>
+<body>
+	<h1> All Posts</h1>
+
+	
+
+	<table border="1">
+		<tr>
+			<td>ID</td>
+			<td>Title</td>
+			<td>Status</td>
+			<td>Description</td>
+			<td>Price</td>
+			<td>Action</td>
+
+
+		</tr>
+
+		<% 
+			posts.forEach( function(pst){ %>
+			<tr>
+				<td><%= pst.id %></td>
+				<td><%= pst.title %></td>
+				<td><%= pst.status %></td>
+				<td><%= pst.post_body %></td>
+				<td><%= pst.amount %></td>
+		
+				<td>
+					<a href="/buyer/edit_post/<%= pst.id %>">Edit</a> |
+					<a href="<%= pst.id %>">Delete</a> |
+					<a href="<%= pst.id %>">Available</a> |
+					<a href="<%= pst.id %>">Unavailable</a> |
+
+				</td>
+			</tr>
+
+		<%
+			}); 
+		%>
+		
+	</table>
+	<br>
+</body>
+</html>

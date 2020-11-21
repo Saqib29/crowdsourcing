@@ -10,11 +10,11 @@
 			<table>
 				<tr>
 					<td>Name</td>
-					<td><input type="text" name="sender" value="<%=fname%>" readonly></td>
+					<td><input type="text" name="sender" value="<%= fname%>" readonly></td>
 				</tr>
 				<tr>
 					<td>To</td>
-					<td><input type="text" name="receiver" placeholder="Name"></td>
+					<td><input type="text" name="receiver" value="<%= sender%>"></td>
 				</tr>
 				<tr>
 					<td>Subject</td>
