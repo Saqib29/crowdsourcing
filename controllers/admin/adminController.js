@@ -56,6 +56,19 @@ router.get('/addAdmin', (req, res) => {
 	res.render('admin/addAdmin');
 });
 
+router.post('/addAdmin', (req, res) => {
+	if(req.body.password == req.body.repassword){
+		main_controll.insert(req.body, (status) => {
+			if(status) {
+				res.redirect('/admin/adminController');
+			}
+		});
+		// console.log(req.body);
+	} else {
+		res.send(`<h1>Password doens't matched!</h2>`);
+	}	
+});
+
 // Categories
 router.get('/Categories', (req, res) => {
 	// will be searched to the categories table
