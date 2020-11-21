@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.3
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2020 at 10:33 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.2.34
+-- Generation Time: Nov 21, 2020 at 07:51 AM
+-- Server version: 10.3.15-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,24 +25,16 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `message`
+-- Table structure for table `post_table`
 --
 
-CREATE TABLE `message` (
-  `username` varchar(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `receiver` varchar(100) NOT NULL,
-  `subject` varchar(500) NOT NULL,
-  `body` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `message`
---
-
-INSERT INTO `message` (`username`, `name`, `receiver`, `subject`, `body`) VALUES
-('jan', 'Jane Alam', 'fsafdas', '		fasfadsf			', '		sdafasfas			'),
-('jan', 'Jane Alam', 'gfdgsgt', '		r5tretre			', '		teytbvdgfd			');
+CREATE TABLE `post_table` (
+  `id` int(255) DEFAULT NULL,
+  `title` varchar(255) NOT NULL,
+  `post_body` varchar(255) NOT NULL,
+  `status` varchar(50) NOT NULL,
+  `buyer_id` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -66,7 +59,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `full_name`, `username`, `password`, `email`, `contact`, `address`, `user_roll`) VALUES
 (1, 'Aminul Islam Saqib', 'saqib', '123', 'saqib@email.com', '01821500050', 'Narayanganj', 'admin'),
-(2, 'Al Zami Arafat', 'zami', '123', 'z@email.com', '634578349', 'Dhaka', 'buyer'),
+(2, 'Jane Alam', 'jan', '123', 'jan@email.com', '1444565242', 'Dhaka, Bangladesh', 'buyer'),
 (3, 'ahnaf alam', 'ahnaf', '123', 'ahnaf@email.com', '456875212', 'Dhaka, Bangladesh', 'seller');
 
 --
