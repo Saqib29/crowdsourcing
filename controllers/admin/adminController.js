@@ -41,10 +41,12 @@ router.get('/profile', (req, res) => {
 // profile edit
 router.get('/edit_profile/:id', (req, res) => {
 	main_controll.getById(req.params.id, (result) => {
-		console.log(result[0]);
+		res.render('admin/edit_profile', result[0]);
 	});
 });
-
+router.post('/edit_profile/:id', (req, res) => {
+	console.log(req.body);
+});
 
 
 // Add People

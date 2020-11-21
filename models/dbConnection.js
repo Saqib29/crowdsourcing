@@ -3,7 +3,7 @@ const mysql = require('mysql');
 var getConnection = function(callback){
 	var connection = mysql.createConnection({
 		  host     : 'localhost',
-		  database : 'crowdsourcing',
+		  database : 'crowdsoucing',
 		  user     : 'root',
 		  password : ''
 		});
