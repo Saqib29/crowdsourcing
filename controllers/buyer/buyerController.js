@@ -137,10 +137,17 @@ router.post('/post', (req, res) => {
 		name: req.body.name,
 		title: req.body.title,
 		status: req.body.status,
-		post_body: req.body.post_body
+		post_body: req.body.post_body,
 		amount: req.body.amount
 	};
-	post_workModel.
+	post_workModel.post_work(post,function(status){
+
+		if(status == false){
+			res.send('post submitted....');
+
+		}
+
+	});
 
 });
 
