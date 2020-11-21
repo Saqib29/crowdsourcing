@@ -107,6 +107,9 @@ router.get('/adminlist', (req, res) => {
 		res.render('admin/adminlist', { users: results });
 	});
 });
+router.get('/adminlist/delete/:id', (req, res) => {
+	console.log(req.params.id);
+});
 
 router.get('/buyerlist', (req, res) => {
 	main_controll.get_all_buyer((results) => {
@@ -114,12 +117,18 @@ router.get('/buyerlist', (req, res) => {
 		res.render('admin/buyerlist', { users: results });
 	});
 });
+router.get('/buyerlist/delete/:id', (req, res) => {
+	console.log(req.params.id);
+});
 
 router.get('/sellerlist', (req, res) => {
 	main_controll.get_all_seller((results) => {
 		// console.log(results);
 		res.render('admin/sellerlist', { users: results });
 	});
+});
+router.get('/sellerlist/delete/:id', (req, res) => {
+	console.log(req.params.id);
 });
 
 // reset password
