@@ -53,12 +53,15 @@ router.post('/login', (req, res) => {
                 // checking if the user admin or buyer or seller
                 if(result[0].user_roll.toLowerCase() == 'admin') {
                     res.redirect('/admin/adminController');
+                    // console.log('admin');
                 } 
                 else if(result[0].user_roll.toLowerCase() == 'buyer') {
                     res.redirect('/buyer/buyerController');
+                    // console.log('buyer');
                 } 
                 else if (result[0].user_roll.toLowerCase() == 'seller') {
                     res.redirect('/seller/sellerController');
+                    // console.log('seller');
                 }
 
             });
