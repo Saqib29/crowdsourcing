@@ -41,5 +41,15 @@ module.exports = {
             }
         });
     },
+    postDelete: (post_id,callback) => {
+        var sql = `DELETE FROM post_table WHERE id=?`;
+        db.getResults(sql, [post_id.id], (results) => {
+            if(results.length > 0) {
+                callback(true);
+            } else {
+                callback(false);
+            }
+        });
+    },
 
 }

@@ -3,7 +3,7 @@
 <head>
 	<title>Post</title>
 </head>
-<body>
+<body style="background-color: lightgray">
 	<h1> All Posts</h1>
 
 	
@@ -30,10 +30,10 @@
 				<td><%= pst.amount %></td>
 		
 				<td>
-					<a href="/buyer/edit_post/<%= pst.id %>">Edit</a> |
-					<a href="<%= pst.id %>">Delete</a> |
-					<a href="<%= pst.id %>">Available</a> |
-					<a href="<%= pst.id %>">Unavailable</a> |
+					<a href="/buyer/edit_post/<%= pst.id %>"><button style="color: #28798F">Edit</button></a> |
+					<a href="/buyer/delete/<%= pst.id %>"><button style="color: red">Delete</button></a> |
+					<a href="<%= pst.id %>"><button style="color: green">Available</button></a> |
+					<a href="<%= pst.id %>"><button style="color: #8F2836">Unavailable</button></a>
 
 				</td>
 			</tr>
@@ -42,7 +42,8 @@
 			}); 
 		%>
 		
-	</table>
+	</table><br>
+	<a href="/buyer/buyerController"><button style="background-color: #5AA9D6">Back</button></a>
 	<br>
 </body>
 </html>
