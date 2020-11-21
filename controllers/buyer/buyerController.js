@@ -23,13 +23,12 @@ router.get('/buyerController', (req, res) => {
 
 	msgModel.msgCount(username, function(status){
 		
-		var message_count ={
-			msg_count: status.length
-		};
-		console.log(message_count);
+		// console.log(message_count.msg_count);
 
-		res.render('buyer/index', username,{
-			msg_count: status.length });
+		res.render('buyer/index', {
+			msg: status.length,
+			name: username
+		});
 		
 	});
 
