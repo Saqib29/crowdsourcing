@@ -69,5 +69,12 @@ module.exports = {
         db.execute(sql, data, (status) => {
             callback(status);
         });
+    },
+    delete_category: (id, callback) => {
+        var sql = `DELETE FROM category WHERE id = ?`;
+
+        db.execute(sql, [id], (status) => {
+            callback(status);
+        });
     }
 }

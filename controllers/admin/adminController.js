@@ -74,9 +74,16 @@ router.post('/addAdmin', (req, res) => {
 router.get('/Categories', (req, res) => {
 	
 	category.getCategories((results) => {
-		res.send(results);
+		res.render('admin/categories', {users: results});
 	});
 });
+
+router.get('/categories/delete/:id', (req, res) => {
+	main_controll.delete_category(req.params.id, (status) => {
+		res.redirect('/admin/Categories');
+	});
+});
+
 // add Catagories
 router.get('/addCategories', (req, res) => {
 	res.render('admin/addCategories');
