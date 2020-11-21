@@ -120,7 +120,18 @@ router.get('/resetpassword', (req, res) => {
 	res.render('admin/resetpassword');
 });
 router.post('/resetpassword', (req, res) => {
-	console.log(req.body);
+	if(req.body.password == req.body.repassword) {
+		var set = {
+			id: req.session.user.id,
+			password: req.body.password
+		}
+		main_controll.resetPassword(set, (status) => {
+			res.redirect('/admin/adminController');
+		});
+	}
+	else{
+		res.send('<h1>Password not matched!</h1>');
+	}
 });
 
 router.get('/logout', (req, res) => {
