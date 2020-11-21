@@ -2,15 +2,15 @@
 <html>
 <head>
 	<title>Sellers</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body style="background-color: #BCD6CA">
+
 	<h1>Seller List</h1><br>
-	<input type="text" name="search" placeholder="search by category">
-	<a href="" ><button>Search</button></a><br><br>
 
-	
 
-	<table border="1">
+	<table border="1" id="myTable">
 		<tr>
 			<td>ID</td>
 			<td>Name</td>
@@ -22,7 +22,7 @@
 
 		</tr>
 
-		<% 
+		 <% 
 			sellers.forEach( function(s){ %>
 			<tr>
 				<td><%= s.user_id %></td>
@@ -39,10 +39,11 @@
 
 		<%
 			}); 
-		%>
+		%> 
 		
 	</table>
 	<br>
+
 	<a href="/buyer/buyerController"><button style="background-color: #5AA9D6">Back</button></a>
 </body>
 </html>

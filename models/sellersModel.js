@@ -17,4 +17,10 @@ getAll: (callback) => {
             callback(result);
         });
     },
+    search: (search_item, callback) => {
+        var sql = `SELECT * FROM seller WHERE id =?`;
+        db.getResults(sql,[search_item.search], (results) => {
+            callback(results);
+        });
+    },
 }

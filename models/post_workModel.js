@@ -51,5 +51,15 @@ module.exports = {
             }
         });
     },
+    statusUpdate: (post_id,callback) => {
+        var sql = `UPDATE post_table SET status=? WHERE id=?` ;
+        db.getResults(sql, [post_id.status,post_id.id], (results) => {
+            if(results.length > 0) {
+                callback(true);
+            } else {
+                callback(false);
+            }
+        });
+    },
 
 }
