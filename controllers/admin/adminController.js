@@ -103,17 +103,24 @@ router.get('/adminlist', (req, res) => {
 
 router.get('/buyerlist', (req, res) => {
 	main_controll.get_all_buyer((results) => {
-		
-		console.log(results);
+		// console.log(results);
 		res.render('admin/buyerlist', { users: results });
 	});
 });
 
 router.get('/sellerlist', (req, res) => {
 	main_controll.get_all_seller((results) => {
-		console.log(results);
+		// console.log(results);
 		res.render('admin/sellerlist', { users: results });
 	});
+});
+
+// reset password
+router.get('/resetpassword', (req, res) => {
+	res.render('admin/resetpassword');
+});
+router.post('/resetpassword', (req, res) => {
+	console.log(req.body);
 });
 
 router.get('/logout', (req, res) => {
