@@ -1,6 +1,7 @@
 const express           = require('express');
-const msgModel	= require.main.require('./models/msgModel');
-const main_controll	= require.main.require('./models/main_controll');
+const msgModel			= require.main.require('./models/msgModel');
+const main_controll		= require.main.require('./models/main_controll');
+const post_workModel			= require.main.require('./models/post_workModel');
 
 const router            = express.Router();
 
@@ -23,13 +24,8 @@ router.get('/buyerController', (req, res) => {
 
 	msgModel.msgCount(username, function(status){
 		
-		var message_count ={
-			msg_count: status.length
-		};
-		console.log(message_count);
 
-		res.render('buyer/index', username,{
-			msg_count: status.length });
+		res.render('buyer/index', username);
 		
 	});
 
@@ -118,6 +114,30 @@ router.post('/message', (req, res)=>{
 		}
 		
 	});
+});
+
+router.get('/post', (req, res) => {
+	var user =   req.session.user;
+
+	var username = {
+		id: user.id,
+		fname: user.full_name
+	};
+
+	res.render('buyer/post_work', username);
+
+});
+router.post('/post', (req, res) => {
+	var post = {
+		id: req.body.id,
+		name: req.body.name,
+		title: req.body.title,
+		status: req.body.status,
+		post_body: req.body.post_body
+		amount: req.body.amount
+	};
+	post_workModel.
+
 });
 
 router.get('/logout', (req, res) => {
