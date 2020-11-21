@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller List</title>
+    <link rel="stylesheet" href="/abc/css/adminlist.css">
+</head>
+<body>
+    
+    <fieldset>
+        <legend>Seller Lists</legend>
+        <table border="1">
+            <tr>
+                <td>Id</td>
+                <td>username</td>
+                <td>Full Name</td>
+                <td>Email</td>
+                <td>Contact No</td>
+                <td>Address</td>
+                <td>User Roll</td>
+                <td>Action</td>
+            </tr>
+            
+            <% users.forEach((user) => { %>
+                <tr>
+                    <td><%= user.id %></td>
+                    <td><%= user.username %></td>
+                    <td><%= user.full_name %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.contact %></td>
+                    <td><%= user.address %></td>
+                    
+                    <td><%= user.user_roll %></td>
+                    <td>
+                        <a href="/adminOperation/update/<%= user.id %>"><button style="color: green;">update</button></a>
+                        <a href="/adminOperation/delete/<%= user.id %>"><button style="color: red;">delete</button></a>
+                    </td>
+                </tr>
+            <% }); %>
+
+        </table>
+        <br>
+        <a href="/home/admin"><button>Back</button></a>
+    </fieldset>
+    <style>
+        td{
+            text-align: center;
+            padding: 2px 14px;
+        }
+    </style>
+    
+</body>
+</html>

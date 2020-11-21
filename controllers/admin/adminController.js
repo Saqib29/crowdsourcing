@@ -97,18 +97,22 @@ router.post('/addCategories', (req, res) => {
 router.get('/adminlist', (req, res) => {
 	main_controll.get_all_admin((results) => {
 		console.log(results);
+		res.render('admin/adminlist', { users: results });
 	});
 });
 
 router.get('/buyerlist', (req, res) => {
 	main_controll.get_all_buyer((results) => {
+		
 		console.log(results);
+		res.render('admin/buyerlist', { users: results });
 	});
 });
 
 router.get('/sellerlist', (req, res) => {
 	main_controll.get_all_seller((results) => {
 		console.log(results);
+		res.render('admin/sellerlist', { users: results });
 	});
 });
 
