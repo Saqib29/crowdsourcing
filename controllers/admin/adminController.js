@@ -1,6 +1,7 @@
 const express 	= require('express');
 const main_controll     = require.main.require('./models/main_controll');
-const router 	= express.Router();
+const category	 		= require.main.require('./models/category');
+const router 			= express.Router();
 
 router.get('*', (req, res, next) => {
 	if(req.session.user == null) {
@@ -71,15 +72,24 @@ router.post('/addAdmin', (req, res) => {
 
 // Categories
 router.get('/Categories', (req, res) => {
-	// will be searched to the categories table
-	// and show categories
-	res.send('categories will be shown');
+	
+	category.getCategories((results) => {
+		res.send(results);
+	});
 });
-
-
-// add Categories
+// add Catagories
 router.get('/addCategories', (req, res) => {
 	res.render('admin/addCategories');
+});
+router.post('/addCategories', (req, res) => {
+	category.addCategory(req.body, (status) => {
+		if(status){
+			res.redirect('/admin/adminController');
+		} else {
+			res.send('<h1>Something went wrong!</h1>');
+		}
+	});
+	// console.log(req.body);
 });
 
 // Operation
