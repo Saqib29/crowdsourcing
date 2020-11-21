@@ -6,7 +6,6 @@
 <body style="background-color: lightgray">
 	<h1> All Posts</h1>
 
-	
 
 	<table border="1">
 		<tr>
@@ -32,8 +31,8 @@
 				<td>
 					<a href="/buyer/edit_post/<%= pst.id %>"><button style="color: #28798F">Edit</button></a> |
 					<a href="/buyer/delete/<%= pst.id %>"><button style="color: red">Delete</button></a> |
-					<a href="<%= pst.id %>"><button style="color: green">Available</button></a> |
-					<a href="<%= pst.id %>"><button style="color: #8F2836">Unavailable</button></a>
+					<a href="/buyer/available/<%= pst.id %>/<%= 'Available' %>"><button style="color: green">Available</button>|</a>
+					<a href="/buyer/available/<%= pst.id%>/<%= 'Unavailable' %>"><button style="color: #8F2836">Unavailable</button></a>
 
 				</td>
 			</tr>

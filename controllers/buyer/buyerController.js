@@ -243,7 +243,6 @@ router.post('/delete/:id', (req, res) => {
 	var post_id = {id: req.params.id};
 
 	post_workModel.postDelete(post_id, function (status) {
-		console.log(status);
 
 		if(status == false){
 			/*res.send('post updated....');*/
@@ -269,6 +268,23 @@ router.get('/post_list', (req, res) => {
 });
 
 
+router.get('/available/:id/:status', (req, res) => {
+	
+	var post_id = {
+		id: req.params.id,
+		status: req.params.status
+	};
+
+	post_workModel.statusUpdate(post_id, function (status) {
+	
+		if(status == false){
+			res.redirect('/buyer/post_list');
+
+		}
+	});
+});
+
+
 //     Seller Controller >>>>>>>>>>>>>>>>>>>>>
 
 router.get('/sellers', (req, res) => {
@@ -278,6 +294,8 @@ router.get('/sellers', (req, res) => {
 	});
 
 });
+
+
 
 
 //     reset password
