@@ -45,7 +45,9 @@ router.get('/edit_profile/:id', (req, res) => {
 	});
 });
 router.post('/edit_profile/:id', (req, res) => {
-	console.log(req.body);
+	main_controll.update(req.body, (status) => {
+		console.log(status);
+	});
 });
 
 
