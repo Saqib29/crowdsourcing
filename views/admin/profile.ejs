@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= user.username %> | Profile</title>
+</head>
+<body>
+    <form method="post">
+		<fieldset>
+			<legend><h2>Profile</h2></legend>
+			<table>
+				<tr>
+					<td>ID</td>
+					<td><%= user.id%></td>
+				</tr>
+				<tr>
+					<td>Name</td>
+					<td><%= user.full_name%></td>
+				</tr>
+				<tr>
+					<td>Username</td>
+					<td><%= user.username%></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><%= user.password%></td>
+				</tr>
+				<tr>
+					<tr>
+					<td>Address</td>
+					<td><%= user.address%></td>
+				</tr>
+				<tr>
+					<td>Contact</td>
+					<td><%= user.contact%></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><%= user.email%></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+			<button><a href="/admin/edit_profile/<%= user.id %>">Edit</a></button>
+        </fieldset>
+    </form>
+</body>
+</html>

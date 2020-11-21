@@ -24,9 +24,28 @@ router.get('/adminController', (req, res)=>{
 // profile
 router.get('/profile', (req, res) => {
 	main_controll.getById(req.session.user.id, (result) => {
-		res.send(result); // --->>>
+		// const user = {
+		// 	id: result[0].id,
+		// 	full_name: result[0].full_name,
+		// 	username: result[0].username,
+		// 	email: result[0].email,
+		// 	contact: result[0].contact,
+		// 	address: result[0].address,
+		// 	user_roll: result[0].user_roll
+		// };
+		res.render('admin/profile', { user : result[0] });
 	});
 });
+
+
+// profile edit
+router.get('/edit_profile/:id', (req, res) => {
+	main_controll.getById(req.params.id, (result) => {
+		console.log(result[0]);
+	});
+});
+
+
 
 // Add People
 router.get('/addAdmin', (req, res) => {
@@ -65,9 +84,6 @@ router.get('/sellerlist', (req, res) => {
 		console.log(results);
 	});
 });
-
-
-
 
 router.get('/logout', (req, res) => {
 	req.session.user = null;
