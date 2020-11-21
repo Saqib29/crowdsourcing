@@ -97,19 +97,41 @@ router.post('/addCategories', (req, res) => {
 router.get('/adminlist', (req, res) => {
 	main_controll.get_all_admin((results) => {
 		console.log(results);
+		res.render('admin/adminlist', { users: results });
 	});
 });
 
 router.get('/buyerlist', (req, res) => {
 	main_controll.get_all_buyer((results) => {
-		console.log(results);
+		// console.log(results);
+		res.render('admin/buyerlist', { users: results });
 	});
 });
 
 router.get('/sellerlist', (req, res) => {
 	main_controll.get_all_seller((results) => {
-		console.log(results);
+		// console.log(results);
+		res.render('admin/sellerlist', { users: results });
 	});
+});
+
+// reset password
+router.get('/resetpassword', (req, res) => {
+	res.render('admin/resetpassword');
+});
+router.post('/resetpassword', (req, res) => {
+	if(req.body.password == req.body.repassword) {
+		var set = {
+			id: req.session.user.id,
+			password: req.body.password
+		}
+		main_controll.resetPassword(set, (status) => {
+			res.redirect('/admin/adminController');
+		});
+	}
+	else{
+		res.send('<h1>Password not matched!</h1>');
+	}
 });
 
 router.get('/logout', (req, res) => {

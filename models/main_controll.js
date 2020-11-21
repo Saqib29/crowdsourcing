@@ -62,5 +62,12 @@ module.exports = {
         db.execute(sql, data, (status) => {
             callback(status);
         });
+    },
+    resetPassword: (set, callback) => {
+        var sql = `UPDATE user SET password = ? WHERE id = ?`;
+        var data = [set.password, set.id];
+        db.execute(sql, data, (status) => {
+            callback(status);
+        });
     }
 }
