@@ -36,6 +36,9 @@ router.get('/buyerController', (req, res) => {
 });
 
 
+//         User Profile Controller >>>>>>>>>>>>>>>>>>>>>>
+
+
 router.get('/profile', (req, res) => {
 	var user =   req.session.user;
 	var profile = {
@@ -91,6 +94,8 @@ router.post('/edit_profile/:username', (req, res)=>{
 	});
 });
 
+
+//      Message Controller >>>>>>>>>>>>>>>>>>>>>>>>>>
 
 router.get('/message', (req, res) => {
 	var user =   req.session.user;
@@ -152,12 +157,13 @@ router.post('/message/:id', (req, res)=>{
 		
 		if(status == false){
 			res.send('message send....');
-
 		}
 		
 	});
 });
 
+
+//            POST Controller>>>>>>>>>>>>>>>>>>>>>>>
 
 router.get('/post', (req, res) => {
 	var user =   req.session.user;
@@ -171,7 +177,33 @@ router.get('/post', (req, res) => {
 
 });
 
+router.get('/edit_post/:id', (req, res) => {
+	
+	var post_id = {id: req.params.id};
 
+	post_workModel.getByPostId(post_id, function (status) {
+		
+		res.render('buyer/edit_post', {edit_post: status});
+	});
+});
+
+router.post('/edit_post/:id', (req, res) => {
+	
+	var post_id = {id: req.params.id};
+	var post = {
+		title: req.body.title,
+		status: req.body.status,
+		post_body: req.body.post_body,
+		amount: req.body.amount
+	};
+
+	post_workModel.postUpdate(post_id,post, function (status) {
+
+		console.log(status);
+		
+		res.render('buyer/edit_post', {edit_post: status});
+	});
+});
 
 router.post('/post', (req, res) => {
 	var post = {
@@ -209,6 +241,8 @@ router.get('/post_list', (req, res) => {
 });
 
 
+//     Seller Controller >>>>>>>>>>>>>>>>>>>>>
+
 router.get('/sellers', (req, res) => {
 	
 	sellersModel.getAll(function(status){
@@ -216,6 +250,10 @@ router.get('/sellers', (req, res) => {
 	});
 
 });
+
+
+//       Logout Controller >>>>>>>>>>>>>>>>
+
 
 router.get('/logout', (req, res) => {
 	req.session.user = null;

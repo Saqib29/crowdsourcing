@@ -21,5 +21,25 @@ module.exports = {
             }
         });
     },
+    getByPostId: (post_id,callback) => {
+        var sql = `Select * from post_table WHERE id=?`;
+        db.getResults(sql, [post_id.id], (results) => {
+            if(results.length > 0) {
+                callback(results);
+            } else {
+                callback(false);
+            }
+        });
+    },
+    postUpdate: (post_id,post,callback) => {
+        var sql = `UPDATE post_table SET title=?,post_body=?,status=?,amount=? WHERE id=?`;
+        db.getResults(sql, [post.title,post.post_body,post.status,post.amount,post_id.id], (results) => {
+            if(results.length > 0) {
+                callback(results);
+            } else {
+                callback(false);
+            }
+        });
+    },
 
 }
