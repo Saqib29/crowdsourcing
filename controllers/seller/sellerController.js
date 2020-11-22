@@ -46,6 +46,27 @@ router.post('/edit_profile/:id', (req, res) => {
 	// console.log(req.body);
 });
 
+// All posts router
+router.get('/allpost', (req, res) => {
+	operation.get_all_posts((results) => {
+		res.render('seller/allposts', { posts : results });
+	});
+	
+});
+
+// sent messages
+router.get('/se_messages/:username', (req, res) => {
+	operation.get_sent_messages(req.params.username, (results) => {
+		console.log(results);
+	});
+});
+
+// recieved messages
+router.get('/re_messages/:username', (req, res) => {
+	operation.get_recieved_messages(req.params.username, (results) => {
+		console.log(results);
+	});
+});
 
 // logout router
 router.get('/logout', (req, res) => {
