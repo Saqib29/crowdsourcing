@@ -16,9 +16,69 @@
 
             <div class="header" >
                 <ul>
-                    <li><a href=""><i class="fas fa-bell"><%= mail %></i></a></li>
+                    <li class="buyer"><a href=""><i class="fas fa-bell"><%= email_count %></i></a>
+                    	<ul >
+                    		<% email.forEach( function(e){
+                    			if(e.status === 'unread'){ %>
+                    				<li >				
+              							<a href="/buyer/message" style="text-align: center;">
+              								<h3 >New Email</h3>
+                    						<h4>to: <%= e.name %></h4>
+                    						<p style="color: blue">sub: <%= e.subject%></p><br><br>Read>>>
+                    					</a>
+                    				</li>
+                    			<%
+                    			};
+                    			%>
 
-                    <li><a href="/buyer/message"><i class="fas fa-comment-alt"><%= msg %></i></a></li>
+								<li>
+									<a href="/buyer/message" style="text-align: center;">
+										<h4>to: <%= e.name %></h4>
+										<p>sub: <%= e.subject%></p><br><br>Read>>>
+									</a>
+								</li>
+							<%
+							}); 
+							%>
+
+							<li><a href="/buyer/message" style="text-align: center;">See all message</i></a></li>
+
+                        </ul>
+                    </li>
+                    	
+
+                    <li>
+                    	<a href="/buyer/message"><i class="fas fa-comment-alt"><%= msg_count %></i></a>
+                    	
+                    	<ul >
+                    		<% msg.forEach( function(m){
+                    			if(m.status === 'unread'){ %>
+                    				<li >				
+              							<a href="/buyer/message" style="text-align: center;">
+              								<h3 >New Message</h3>
+                    						<h4><%= m.name %></h4>
+                    						<p style="color: blue"><%= m.body%></p><br><br>Read>>>
+                    					</a>
+                    				</li>
+                    			<%
+                    			};
+                    			%>
+
+								<li>
+									<a href="/buyer/message" style="text-align: center;">
+										<h4><%= m.name%></h4>
+										<p><%= m.body%></p><br><br>Read>>>
+									</a>
+								</li>
+							<%
+							}); 
+							%>
+
+							<li><a href="/buyer/message" style="text-align: center;">See all message</i></a></li>
+
+                        </ul>
+
+                    </li>
 
                     <li>
                         <a href=""><i class="fas fa-user-circle"><%= name.uname %></i></a>
