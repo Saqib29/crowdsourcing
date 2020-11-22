@@ -77,6 +77,14 @@ router.get('/history/:id', (req, res) => {
 	// res.send(req.params.id);
 });
 
+// transaction
+router.get('/transaction/:id', (req, res) => {
+	operation.get_accounts(req.params.id, (result) => {
+		res.render('seller/transaction', { record : result[0] });
+	});
+	// console.log(req.params.id);
+});
+
 // logout router
 router.get('/logout', (req, res) => {
 	req.session.user = null;

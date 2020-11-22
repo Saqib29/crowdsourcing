@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Transactions</title>
+	<link rel="stylesheet" type="text/css" href="/abc/css/profile.css">
+</head>
+<body>
+	<form method="post"></form>
+		<fieldset>
+			<legend><h2>Transaction</h2></legend>
+			
+			<table>
+				<tr>
+					<td>ID</td>
+					<td><%= record.id %></td>
+				</tr>
+				<tr>
+					<td>Name</td>
+					<td><%= record.user_name %></td>
+				</tr>
+				<tr>
+					<td>Diposit</td>
+					<td><%= record.deposit %></td>
+				</tr>
+				<tr>
+					<td>Withdraw</td>
+					<td><%= record.withdraw %></td>
+				</tr>
+				<tr>
+					<td>Net Balance</td>
+					<td><%= record.net_balance %></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+            <button type="button"><a style="text-decoration: none;" href="/seller/withdraw/<%= record.id %>">Withdraw</a></button>
+			<button type="button"><a style="text-decoration: none;" href="/seller/deposit/<%= record.id %>">Deposit</a></button>
+		
+		<a href="/seller/sellerController"><button>Back</button></a>
+		</fieldset>
+	</form>
+		<br>
+		<br>
+	
+	
+</body>
+</html>

@@ -36,5 +36,12 @@ module.exports = {
         db.getResults(sql, [id], (results) => {
             callback(results);
         });
+    },
+    get_accounts: (id, callback) => {
+        var sql = `SELECT * FROM account WHERE user_id = ?`;
+
+        db.getResults(sql, [id], (result) => {
+            callback(result);
+        });
     }
 }
