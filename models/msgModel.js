@@ -36,4 +36,16 @@ module.exports = {
             /*console.log(results);*/
         });
     },
+    getMsg: (username,callback) => {
+        var sql = `SELECT * FROM message WHERE receiver=?`;
+        db.getResults(sql, [username.uname], (results) => {
+            if(results.length > 0) {
+               
+                callback(results);
+            } else {
+                callback(false);
+            }
+            /*console.log(results);*/
+        });
+    },
 }
