@@ -1,4 +1,5 @@
 const express           = require('express');
+const nodemailer 		= require('nodemailer');
 const msgModel			= require.main.require('./models/msgModel');
 const main_controll		= require.main.require('./models/main_controll');
 const post_workModel	= require.main.require('./models/post_workModel');
@@ -97,36 +98,62 @@ router.post('/edit_profile/:username', (req, res)=>{
 
 //      Message Controller >>>>>>>>>>>>>>>>>>>>>>>>>>
 
-router.get('/message', (req, res) => {
+router.get('/email', (req, res) => {
 	var user =   req.session.user;
 
 	res.render('buyer/message',{fname: user.full_name});
 });
 
 
-router.post('/message', (req, res)=>{
+router.post('/email', (req, res)=>{
 	var user =   req.session.user;
 	var username= {
 		uname: user.username
 	};
+
 	var send_message = {
 		sender: req.body.sender,
 		receiver: req.body.receiver,
 		subject: req.body.subject,
 		body: req.body.body,
+		status: 'unread',
 	};
 
 	msgModel.send_message(username,send_message, function(status){
-		//console.log(status);
-		
-		if(status == false){
-			res.redirect('/buyer');
-		}
 
-		
+		const output = ` <p>${req.body.body}</p>`;
+
+  		let transporter = nodemailer.createTransport({
+    		service: "Gmail",
+    		auth: {
+        		user: 'alzamiarafat00@gmail.com',
+        		pass: '#####'
+    		},
+
+    		tls:{
+      			rejectUnauthorized:false
+    		}
+  		});
+
+  		let mailOptions = {
+      		from: req.body.sender + '<alzamiarafat00@gmail.com>', 
+      		to: req.body.receiver, 
+      		subject: req.body.subject, 
+      		html: output
+  		};
+  
+  		transporter.sendMail(mailOptions, (error, info) => {
+      		if (error) {
+          		return console.log(error);
+      		}
+      		console.log('Message sent: %s', info.messageId);   
+      		console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+			res.send('email send.....');
+      
+  		});
 	});
-});
 
+});
 
 
 router.get('/message/:id', (req, res) => {

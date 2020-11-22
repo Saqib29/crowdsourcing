@@ -1,6 +1,7 @@
 const express           = require('express');
 const expressSession    = require('express-session');
 const bodyParser        = require('body-parser');
+const nodemailer 		= require('nodemailer');
 
 const login             = require('./controllers/home');
 const registration      = require('./controllers/home');
