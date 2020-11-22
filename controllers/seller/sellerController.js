@@ -57,14 +57,14 @@ router.get('/allpost', (req, res) => {
 // sent messages
 router.get('/se_messages/:username', (req, res) => {
 	operation.get_sent_messages(req.params.username, (results) => {
-		console.log(results);
+		res.render('seller/messages', { messages : results });
 	});
 });
 
 // recieved messages
 router.get('/re_messages/:username', (req, res) => {
 	operation.get_recieved_messages(req.params.username, (results) => {
-		console.log(results);
+		res.render('seller/messages', { messages : results });
 	});
 });
 

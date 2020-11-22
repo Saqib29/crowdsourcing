@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts</title>
+    <link rel="stylesheet" href="/abc/css/adminlist.css">
+</head>
+<body>
+    
+    <fieldset>
+        <legend>All Posts</legend>
+        <table border="1">
+            <tr>
+                <td>Sneder</td>
+                <td>Reciever</td>
+                <td>Title</td>
+                <td>Message</td>
+                
+                <td>Action</td>
+            </tr>
+            
+            <% messages.forEach((message) => { %>
+                <tr>
+                    <td><%= message.username %></td>
+                    <td><%= message.receiver %></td>
+                    <td><%= message.subject %></td>
+                    <td><%= message.body %></td>
+                    
+                    <td>
+                        <a href="/seller/se_messages/<%= message.receiver %>"><button style="color: green;">message</button></a>
+                    </td>
+                </tr>
+            <% }); %>
+
+        </table>
+        <br>
+        <a href="/seller/sellerController"><button>Back</button></a>
+    </fieldset>
+    <style>
+        td{
+            text-align: center;
+            padding: 2px 14px;
+        }
+    </style>
+    
+</body>
+</html>
