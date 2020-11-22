@@ -30,8 +30,15 @@ router.get('/buyerController', (req, res) => {
 	msgModel.msgCount(username, function(status){
 		msgModel.emailCount(username, function(result){
 
-			res.render('buyer/index', {mail: result.length,msg: status.length,name: username});
-		
+			console.log(status);
+			console.log(result);
+
+			res.render('buyer/index', {
+				email: result, 
+				email_count: result.length,
+				msg: status, 
+				msg_count: status.length,
+				name: username});
 		});	
 	});
 });
