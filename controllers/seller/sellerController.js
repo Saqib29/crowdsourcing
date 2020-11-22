@@ -57,15 +57,24 @@ router.get('/allpost', (req, res) => {
 // sent messages
 router.get('/se_messages/:username', (req, res) => {
 	operation.get_sent_messages(req.params.username, (results) => {
-		res.render('seller/messages', { messages : results });
+		res.render('seller/messages', { messages : results, title : 'Sent messages' });
 	});
 });
 
 // recieved messages
 router.get('/re_messages/:username', (req, res) => {
 	operation.get_recieved_messages(req.params.username, (results) => {
-		res.render('seller/messages', { messages : results });
+		res.render('seller/messages', { messages : results, title : 'Recieved messages' });
 	});
+});
+
+//  sellers project history
+router.get('/history/:id', (req, res) => {
+	operation.get_history(req.params.id, (results) => {
+		res.render('seller/history', { histories : results, name: req.session.user.username });
+		// console.log(results);
+	});
+	// res.send(req.params.id);
 });
 
 // logout router

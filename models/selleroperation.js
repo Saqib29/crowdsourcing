@@ -29,5 +29,12 @@ module.exports = {
         db.getResults(sql, [username], (results) => {
             callback(results);
         });
+    },
+    get_history: (id, callback) => {
+        var sql = `SELECT * FROM seller WHERE user_id = ?`;
+
+        db.getResults(sql, [id], (results) => {
+            callback(results);
+        });
     }
 }

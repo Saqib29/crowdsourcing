@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= name %> Project History</title>
+    <link rel="stylesheet" href="/abc/css/adminlist.css">
+</head>
+<body>
+    
+    <fieldset>
+        <legend>Project Histories</legend>
+        <table border="1">
+            <tr>
+                <td>Buyer</td>
+                <td>Project Title</td>
+                <td>Category</td>
+                <td>Balance</td>
+                
+            </tr>
+            
+            <% histories.forEach((history) => { %>
+                <tr>
+                    <td><%= history.buyer_name %></td>
+                    <td><%= history.project_title %></td>
+                    <td><%= history.category_name %></td>
+                    <td><%= history.balance %></td>
+                    
+                </tr>
+            <% }); %>
+
+        </table>
+        <br>
+        <a href="/seller/sellerController"><button>Back</button></a>
+    </fieldset>
+    <style>
+        td{
+            text-align: center;
+            padding: 2px 14px;
+        }
+    </style>
+    
+</body>
+</html>
