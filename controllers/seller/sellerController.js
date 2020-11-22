@@ -11,9 +11,13 @@ router.get('*', (req, res, next) => {
 });
 
 router.get('/sellerController', (req, res) => {
-    res.send("<h1>I'm seller</h1>");
+    res.render('seller/index', { user : req.session.user });
 });
 
 
+router.get('/logout', (req, res) => {
+	req.session.user = null;
+	res.redirect('/home/login');
+});
 
 module.exports = router;
