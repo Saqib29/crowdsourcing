@@ -108,7 +108,7 @@ router.post('/edit_profile/:username', (req, res)=>{
 router.get('/email', (req, res) => {
 	var user =   req.session.user;
 
-	res.render('buyer/message',{fname: user.full_name});
+	res.render('buyer/email',{fname: user.full_name});
 });
 
 
@@ -163,14 +163,21 @@ router.post('/email', (req, res)=>{
 });
 
 
-router.get('/message/:id', (req, res) => {
+router.get('/message', (req, res) => {
 
-	var user_id = {id: req.params.id};
 	var user =   req.session.user;
+	var username = {
+		uname: user.username
+	};
 
-	sellersModel.getById(user_id, function(status) {
-		res.render('buyer/seller_message', {fname: user.full_name, sender: status[0].name});
-	})
+	msgModel.getMsg(username, function(result) {
+		console.log(result);
+		res.render('buyer/message',{msg: result});
+	});
+
+	/*sellersModel.getById(user_id, function(status) {
+		
+	})*/
 	
 });
 

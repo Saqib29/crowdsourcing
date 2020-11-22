@@ -17,10 +17,14 @@
             <div class="header" >
                 <ul>
                     <li class="buyer"><a href=""><i class="fas fa-bell"><%= email_count %></i></a>
-                    	<ul >
-                    		<% email.forEach( function(e){
-                    			if(e.status === 'unread'){ %>
-                    				<li >				
+                    	<ul >
+
+                    		<% email.forEach( function(e){
+
+                    			if(e.status === 'unread'){ %>
+
+                    				<li >				
+
               							<a href="/buyer/message" style="text-align: center;">
               								<h3 >New Email</h3>
                     						<h4>to: <%= e.name %></h4>
@@ -41,7 +45,8 @@
 							}); 
 							%>
 
-							<li><a href="/buyer/message" style="text-align: center;">See all message</i></a></li>
+							<li><a href="/buyer/message" style="text-align: center;">See all message</i></a></li>
+
 
                         </ul>
                     </li>
@@ -125,8 +130,14 @@
             
                 </li>
         
-                 <li><a href="#"><i class="fa fa-history"></i>      History</a></li>
-                  <li><a href="/buyer/email"><i class="fab fa-google-plus-square"></i>  Email</a>
+                <li><a href="#"><i class="fa fa-history"></i>      History</a></li>
+                <li><a href="/buyer/email"><i class="fab fa-google-plus-square"></i>  Contact</a>
+                     <ul>
+                        <li><a href="/buyer/email"><i class="fas fa-plus-circle"></i>Send Email </a></li>  
+                        <li><a href="/buyer/message"><i class="fas fa-list-alt"></i> Message</a></li>     
+                    </ul>
+                </li>
+
                 <li><a href="/buyer/logout"><i class="fas fa-sign-out-alt"></i>Log Out</a></li>
             </ul> 
 

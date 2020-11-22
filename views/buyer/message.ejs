@@ -1,92 +1,37 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Message</title>
+	<title>Sellers</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
-	<form method="post">
-		<fieldset>
-			<legend>New Message</legend>
-			<table>
-				<tr>
-					<td>Name</td>
-					<td><input type="text" name="sender" value="<%=fname%>" readonly></td>
-				</tr>
-				<tr>
-					<td>To</td>
-					<td><input type="text" name="receiver" placeholder="Name"></td>
-				</tr>
-				<tr>
-					<td>Subject</td>
-					<td><textarea name="subject" rows="3" cols="50">
-					</textarea></td>
-				</tr>
-				<tr>
-					<td>Body</td>
-					<td><textarea name="body" rows="10" cols="50">
-					</textarea></td>
-				</tr>
+<body style="background-color: #BCD6CA">
 
-				<tr>
-					<td></td>
-					<td><input type="submit" name="submit" value="send"></td>
-				</tr>
-			</table>
-			
-		</fieldset>
-		<br>
-		<br>
-	</form>
-</body>
-</html> -->
+	<h1>Inbox</h1><br>
 
 
+	<table id="myTable">
 
+		 <% 
+			msg.forEach( function(s){ %>
+			<tr>
+				<td><%= s.name %>
+					<br>
+					
+				
+				<%= s.body %> <br>
+					<a href="/buyer/message/<%=s.user_id%>"><button style="background-color: lightblue;">Details</button></a>
+				</td>
+				
+			</td>
 
+		<%
+			}); 
+		%> 
+		
+	</table>
+	<br>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Email</title>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css" />
-  <link rel="stylesheet" href="/abc/css/style.css">
-</head>
-<body>
-  <div class="container">
-    <div class="wrapper animated bounceInLeft">
-      <div class="company-info">
-        <h1>Crowd Sourcing</h1>
-      </div>
-      <div class="contact">
-        <h3>Email Us</h3>
-        <form method="POST" action="email">
-          <p>
-            <label>Name</label>
-            <input type="text" name="sender" value="<%=fname%>" readonly>
-          </p>
-          <p>
-            <label>To</label>
-            <input type="email" name="receiver" placeholder="Gmail">
-          </p>
-          <p class="full">
-            <label>Subject</label>
-            <textarea name="subject" rows="2"></textarea>
-          </p>
-          <p class="full">
-            <label>Message</label>
-            <textarea name="body" rows="5.5"></textarea>
-          </p>
-          <p class="full">
-            <button type="submit">Submit</button>
-          </p>
-        </form>
-      </div>
-    </div>
-  </div>
+	<a href="/buyer/buyerController"><button style="background-color: #5AA9D6">Back</button></a>
 </body>
 </html>
