@@ -22,18 +22,18 @@ router.get('/buyerController', (req, res) => {
 
 	var username = {
 		name: user.full_name,
-		uname: user.username
+		uname: user.username,
+		email: user.email,
+		status: 'unread'
 	};
 
 	msgModel.msgCount(username, function(status){
+		msgModel.emailCount(username, function(result){
 
-		res.render('buyer/index', {
-			msg: status.length,
-			name: username
-		});
+			res.render('buyer/index', {mail: result.length,msg: status.length,name: username});
 		
-	});	
-
+		});	
+	});
 });
 
 
@@ -119,7 +119,7 @@ router.post('/email', (req, res)=>{
 		status: 'unread',
 	};
 
-	msgModel.send_message(username,send_message, function(status){
+	msgModel.send_email(username,send_message, function(status){
 
 		const output = ` <p>${req.body.body}</p>`;
 
@@ -127,7 +127,7 @@ router.post('/email', (req, res)=>{
     		service: "Gmail",
     		auth: {
         		user: 'alzamiarafat00@gmail.com',
-        		pass: '#####'
+        		pass: '01780944266'
     		},
 
     		tls:{
