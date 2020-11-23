@@ -2,6 +2,7 @@ const express           = require('express');
 const expressSession    = require('express-session');
 const bodyParser        = require('body-parser');
 const nodemailer 		= require('nodemailer');
+const uplaod            = require('express-fileupload');
 
 const login             = require('./controllers/home');
 const registration      = require('./controllers/home');
@@ -24,6 +25,7 @@ app.use('/abc', express.static('assets'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(expressSession({ secret: 'secrete value', saveUninitialized: true, resave: false }));
+app.use(uplaod());
 
 
 app.use('/home', login);

@@ -2,6 +2,11 @@ const express           = require('express');
 const operation 		= require.main.require('./models/selleroperation');
 const main_controll		= require.main.require('./models/main_controll');
 const router            = express.Router();
+const upload			= require('express-fileupload');
+const app 				= express();
+
+app.use(upload());
+
 
 router.get('*', (req, res, next) => {
 	if(req.session.user == null) {
@@ -21,6 +26,11 @@ router.get('/sellerController', (req, res) => {
 // profile router
 router.get('/profile', (req, res) => {
 	res.render('seller/profile', { profile : req.session.user });
+});
+
+// file upload
+router.post('/fileupload', (req, res) => {
+	console.log(req.files);
 });
 
 // edit_profile
