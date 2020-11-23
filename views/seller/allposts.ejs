@@ -31,7 +31,10 @@
                         
                         <td>
                             <a href="/seller/message/<%= post.id %>"><button style="color: green;">message</button></a>
-                            <a href=""><button style="color: violet;">Upload Work</button></a>
+                            <form action="/seller/fileupload" method="POST">
+                                <input type="file" name="file">
+                                <input type="submit" value="Uploade">
+                            </form>
                         </td>
                     </tr>
                 <% }); %>
