@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title><%= user.uname %>| Profile</title>
+    <title><%= profile.uname %>| Profile</title>
 
     <!-- Fontfaces CSS-->
     <link href="/abc/css/font-face.css" rel="stylesheet" media="all">
@@ -50,8 +50,7 @@
                     <div class="image img-cir img-120">
                         <img src="/abc/images/icon/avatar-big-01.jpg" alt="John Doe" />
                     </div>
-                    <h4 class="name">john doe</h4>
-                    <a href="#">Sign out</a>
+                    <h4 class="name"><%= profile.full_name %></h4>
                 </div>
                 <nav class="navbar-sidebar2">
                     <ul class="list-unstyled navbar__list">
@@ -201,7 +200,7 @@
                                             <img src="/abc/images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#"><%= user.name %></a>
+                                            <a class="js-acc-btn" href="#"><%= profile.username %></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -212,9 +211,9 @@
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#"><%= user.uname %></a>
+                                                        <a href="#"><%= profile.username %></a>
                                                     </h5>
-                                                    <span class="email"><%= user.email %></span>
+                                                    <span class="email"><%= profile.email %></span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">

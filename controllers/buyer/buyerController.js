@@ -61,18 +61,11 @@ router.get('/profile', (req, res) => {
 		contact: user.contact,
 		address: user.address
 	};
-	var username = {
-		name: user.full_name,
-		uname: user.username,
-		email: user.email,
-		status: 'unread'
-	};
 	res.render('buyer/profile', {
 				email: req.session.data.email, 
 				email_count: req.session.data.email_count,
 				msg: req.session.data.msg, 
 				msg_count: req.session.data.msg_count,
-				user: username,
 				profile: profile});
 	
 });
@@ -90,7 +83,12 @@ router.get('/edit_profile/:username', (req, res) => {
 		address: user.address
 	};
 
-	res.render('buyer/edit_profile', profile);
+	res.render('buyer/edit_profile', {
+				email: req.session.data.email, 
+				email_count: req.session.data.email_count,
+				msg: req.session.data.msg, 
+				msg_count: req.session.data.msg_count,
+				profile: profile});
 });
 
 
@@ -110,7 +108,7 @@ router.post('/edit_profile/:username', (req, res)=>{
 		//console.log(status);
 		
 		if(status == true){
-			res.send('Your profile is updated....');
+			res.redirect('/buyer/profile');
 
 		}
 		

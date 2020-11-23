@@ -57,8 +57,8 @@ module.exports = {
         // console.log(user);
     },
     buyer_profileUpdate: (user, callback) => {
-        var sql = "UPDATE user SET full_name=?,username=?,password=?,email=?,contact=?,address=? WHERE id="+user.id+"";
-        var data = [user.full_name, user.username, user.password, user.email, user.contact, user.address, user.id,];
+        var sql = "UPDATE user SET full_name=?,username=?,email=?,contact=?,address=? WHERE id="+user.id+"";
+        var data = [user.full_name, user.username, user.email, user.contact, user.address, user.id,];
         db.execute(sql, data, (status) => {
             callback(status);
         });
