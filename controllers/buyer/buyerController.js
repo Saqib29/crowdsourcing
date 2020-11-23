@@ -47,6 +47,19 @@ router.get('/buyerController', (req, res) => {
 });
 
 
+// search_seller
+router.post('/search', (req, res) => {
+	main_controll.search_seller(req.body.search, (result) => {
+		console.log(result)
+		res.json({
+			result : result
+		});
+	});
+	// console.log(req.body);
+});
+
+
+
 //         User Profile Controller >>>>>>>>>>>>>>>>>>>>>>
 
 

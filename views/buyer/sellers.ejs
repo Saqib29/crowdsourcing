@@ -9,7 +9,9 @@
 
 	<h1>Seller List</h1><br>
 
-
+	<input type="text" name="search" id="search" placeholder="Search by category..." />
+	<!-- <button id="sear">Search</button> -->
+	<br><br>
 	<table border="1" id="myTable">
 		<tr>
 			<td>ID</td>
@@ -24,7 +26,7 @@
 
 		 <% 
 			sellers.forEach( function(s){ %>
-			<tr>
+			<tr  id="all_sellers">
 				<td><%= s.user_id %></td>
 				<td><%= s.name %></td>
 				<td><%= s.category_name %></td>
@@ -38,13 +40,59 @@
 				</td>
 			</tr>
 
+			
+
 		<%
 			}); 
 		%> 
+
+		
 		
 	</table>
 	<br>
 
 	<a href="/buyer/buyerController"><button style="background-color: #5AA9D6">Back</button></a>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+	<script>
+        $(document).ready(() => {
+            $("#search").keyup(() => {
+                
+				var searchField = $('#search').val();
+                // alert('search');
+                // ajax calling
+                $.ajax({
+                    url: "/buyer/search",
+                    data: {search : searchField},
+                    method: "POST",
+                    ContentType: "application/x-www-form-urlencoded",
+                    success: (result) => {
+						   $('#all_sellers').remove();
+						   for(i =0; i< result.length; i++){
+							
+							   var td = `<tr id="add_row"><td> ${result[i].user_id} </td>
+								<td> ${result[i].name }</td>
+								<td> ${result[i].category_name} </td>
+								<td> ${result[i].buyer_name} </td>
+								<td> ${result[i].project_title} </td>
+						
+								<td>
+									<a href="/buyer/message/ ${result[i].user_id} "><button style="background-color: green;">Chat</button></a>
+									<a href="/buyer/message/ ${result[i].user_id} "><button style="background-color: lightblue;">Details</button></a>
+
+								</td></tr>`;
+								
+							   $('#myTable').append(td);
+						   }
+                    },
+                    error: (err) => {
+                        alert(err);
+                    }
+                });
+
+            });
+        });
+    </script>
 </body>
 </html>

@@ -83,5 +83,13 @@ module.exports = {
         db.getResults(sql, null, (results) => {
             callback(results);
         });
+    },
+    search_seller: (category, callback) => {
+        var sql = `SELECT * FROM seller WHERE category_name LIKE '%${category}%'`;
+
+        // console.log(category);
+        db.getResults(sql, null, (result) => {
+            callback(result);
+        });
     }
 }
