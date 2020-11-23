@@ -76,5 +76,12 @@ module.exports = {
         db.execute(sql, [id], (status) => {
             callback(status);
         });
+    },
+    search: (pattern, callback) => {
+        var sql = `SELECT id, full_name, user_roll FROM user WHERE full_name OR username OR email OR contact OR address or user_roll LIKE '${pattern}'`;
+
+        db.getResults(sql, null, (results) => {
+            callback(results);
+        });
     }
 }
