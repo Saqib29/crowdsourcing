@@ -1,5 +1,6 @@
 const express           = require('express');
 const operation 		= require.main.require('./models/selleroperation');
+const main_controll		= require.main.require('./models/main_controll');
 const router            = express.Router();
 
 router.get('*', (req, res, next) => {
@@ -83,6 +84,26 @@ router.get('/transaction/:id', (req, res) => {
 		res.render('seller/transaction', { record : result[0] });
 	});
 	// console.log(req.params.id);
+});
+
+//     reset password
+router.get('/resetpassword', (req, res) => {
+	res.render('seller/resetpassword');
+});
+router.post('/resetpassword', (req, res) => {
+	if(req.body.password == req.body.repassword) {
+		var set = {
+			id: req.session.user.id,
+			password: req.body.password
+		}
+		main_controll.resetPassword(set, (status) => {
+			req.session.user = null;
+			res.redirect('/home/login');
+		});
+	}
+	else{
+		res.send('<h1>Password not matched!</h1>');
+	}
 });
 
 // logout router
