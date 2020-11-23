@@ -38,7 +38,7 @@ router.get('/buyerController', (req, res) => {
 				email_count: result.length,
 				msg: status, 
 				msg_count: status.length,
-				name: username});
+				user: username});
 		});	
 	});
 });

@@ -1,151 +1,402 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <!-- Required meta tags-->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
     <title>Buyer Portal</title>
-    <link rel="stylesheet" href="/abc/css/dashboard.css">
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+    <!-- Fontfaces CSS-->
+    <link href="/abc/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/abc/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/abc/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/abc/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="/abc/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="/abc/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/abc/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/abc/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/abc/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/abc/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/abc/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/abc/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="/abc/css/theme.css" rel="stylesheet" media="all">
 
 </head>
 
-<body>
-    <div class="wrapper" > 
-        <div class="Header" style=" background: #34BBAF;">
-            <h3><i class="fas fa-bars"></i> Menu</h3>
+<body class="animsition">
+    <div class="page-wrapper">
 
-            <div class="header" >
-                <ul>
-                    <li class="buyer"><a href=""><i class="fas fa-bell"><%= email_count %></i></a>
-                    	<ul >
-
-                    		<% email.forEach( function(e){
-
-                    			if(e.status === 'unread'){ %>
-
-                    				<li >				
-
-              							<a href="/buyer/message" style="text-align: center;">
-              								<h3 >New Email</h3>
-                    						<h4>to: <%= e.name %></h4>
-                    						<p style="color: blue">sub: <%= e.subject%></p><br><br>Read>>>
-                    					</a>
-                    				</li>
-                    			<%
-                    			};
-                    			%>
-
-								<li>
-									<a href="/buyer/message" style="text-align: center;">
-										<h4>to: <%= e.name %></h4>
-										<p>sub: <%= e.subject%></p><br><br>Read>>>
-									</a>
-								</li>
-							<%
-							}); 
-							%>
-
-							<li><a href="/buyer/message" style="text-align: center;">See all message</i></a></li>
-
-
-                        </ul>
-                    </li>
-                    	
-
-                    <li>
-                    	<a href="/buyer/message"><i class="fas fa-comment-alt"><%= msg_count %></i></a>
-                    	
-                    	<ul >
-                    		<% msg.forEach( function(m){
-                    			if(m.status === 'unread'){ %>
-                    				<li >				
-              							<a href="/buyer/message" style="text-align: center;">
-              								<h3 >New Message</h3>
-                    						<h4><%= m.name %></h4>
-                    						<p style="color: blue"><%= m.body%></p><br><br>Read>>>
-                    					</a>
-                    				</li>
-                    			<%
-                    			};
-                    			%>
-
-								<li>
-									<a href="/buyer/message" style="text-align: center;">
-										<h4><%= m.name%></h4>
-										<p><%= m.body%></p><br><br>Read>>>
-									</a>
-								</li>
-							<%
-							}); 
-							%>
-
-							<li><a href="/buyer/message" style="text-align: center;">See all message</i></a></li>
-
-                        </ul>
-
-                    </li>
-
-                    <li>
-                        <a href=""><i class="fas fa-user-circle"><%= name.uname %></i></a>
-
-                        <ul>
-                            <li><a href="/buyer/profile"><i class="fas fa-user"></i> Profile</a></li>
-                            <li><a href="/buyer/resetpassword"><i class="fas fa-redo"></i> Reset Password</a></li>
-                            <li ><a href="/buyer/logout" class="logout"><i class="fas fa-power-off"></i>  Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>       
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a href="#">
+                    <h3>Crowd Sourcing</h3>
+                   <!--  <img src="images/icon/logo.png" alt="Cool Admin" /> -->
+                </a>
             </div>
-        </div>
-        
-        <div class="sidebar" style=" background: #34BBAF;"> 
-            <ul>
-              <!--   <li><a href=""><i class="fas fa-tachometer-alt"></i>  Dashboard</a></li> -->
-                <li><a href="/buyer/profile"><i class="fas fa-address-card"></i>  Profile</a></li>
-               
-
-                <li><a href="/buyer/sellers"><i class="fas fa-clipboard"></i>  Sellers</a>
-                   <!--  <ul>
-                        <li><a href=""><i class="fa fa-list-alt"></i> Category</a></li> 
-                    </ul> -->
-                </li>
-
-                <!-- <li><a href="/buyer/message"><i class="fas fa-comment-alt"></i>  Contact</a> -->
-            
-              <!--   <ul> -->
-                    <!-- <li><a href="/buyer/message"><i class="fas fa-user-shield"></i>Admin</a></li>   -->
-                    <!-- <li><a href=""><i class="fas fa-user-tie"></i>Buyer</a></li> -->
-                    <!-- <li><a href=""><i class="fas fa-user-alt"></i>Seller</a></li>      -->         
-                <!-- </ul> -->
-            
-                </li>
-
-                <li><a href=""><i class="fas fa-cogs"></i> Operation</a>
-            
-                <ul>
-                    <li><a href="/buyer/post"><i class="fas fa-plus-circle"></i>Add Post </a></li>  
-                    <li><a href="/buyer/post_list"><i class="fas fa-list-alt"></i> Posts</a></li>
-                    <!-- <li><a href=""><i class="fas fa-user-alt"></i>Seller</a></li>      -->         
-                </ul>
-            
-                </li>
-        
-                <li><a href="#"><i class="fa fa-history"></i>      History</a></li>
-                <li><a href="/buyer/email"><i class="fab fa-google-plus-square"></i>  Contact</a>
-                     <ul>
-                        <li><a href="/buyer/email"><i class="fas fa-plus-circle"></i>Send Email </a></li>  
-                        <li><a href="/buyer/message"><i class="fas fa-list-alt"></i> Message</a></li>     
+            <div class="menu-sidebar__content js-scrollbar1">
+                <nav class="navbar-sidebar">
+                    <ul class="list-unstyled navbar__list">
+                        <li class="active has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="/buyer/profile"><i class="fas fa-user"></i>Profile</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-table"></i>Tables</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                   <a href="/buyer/sellers"><i class="fas fa-users"></i>Sellers</a>
+                                   <li><a href="/buyer/post_list"><i class="fas fa-list-alt"></i>Posts</a></li>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                               <i class="fas fa-cogs"></i> Operation</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li><a href="/buyer/post"><i class="fas fa-plus-circle"></i>Write Post </a></li>  
+                                
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="calendar.html">
+                                <i class="fas fa-calendar-alt"></i>Calendar</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                               <i class="fas fa-address-card"></i>Contact</a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li><a href="/buyer/email"><i class="fas fa-plus-circle"></i>Send Email </a></li>  
+                            </ul>
+                        </li>
                     </ul>
-                </li>
-
-                <li><a href="/buyer/logout"><i class="fas fa-sign-out-alt"></i>Log Out</a></li>
-            </ul> 
-
-            <div class="social_media">
-                <a href="https://web.facebook.com/?_rdc=1&_rdr"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://twitter.com/explore"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.instagram.com/?hl=bn"><i class="fab fa-instagram"></i></a>
-                <a href="https://bd.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+                </nav>
             </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="header-wrap">
+                            <form class="form-header" action="" method="POST">
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                                <button class="au-btn--submit" type="submit">
+                                    <i class="zmdi zmdi-search"></i>
+                                </button>
+                            </form>
+                            <div class="header-button">
+                                <div class="noti-wrap">
+                                    <div class="noti__item js-item-menu">
+                                        <i class="zmdi zmdi-comment-more"></i>
+                                        <span class="quantity"><%= msg_count %></span>
+                                        <div class="mess-dropdown js-dropdown">
+                                            <div class="mess__title">
+                                                <p>You have <%= msg_count %> news message</p>
+                                            </div>
+
+                                           <% msg.forEach( function(m){
+                                                if(m.status === 'unread'){ %>
+                                            <div class="mess__item">
+                                                <div class="image img-cir img-40">
+                                                    <img src="/abc/images/icon/avatar-06.jpg" alt="Michelle Moreno" />
+                                                </div>
+                                                <div class="content">
+                                                    <h6><%= m.name %></h6>
+                                                    <p><%= m.body%></p>
+                                                    <a href="">Read</a>
+                                                </div>
+                                            </div>
+                                            <%
+                                                };
+                                            }); 
+                                            %>
+                                            
+                                            <div class="mess__footer">
+                                                <a href="#">View all messages</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="noti__item js-item-menu">
+                                        <i class="zmdi zmdi-notifications"></i>
+                                        <span class="quantity"><%= email_count %></span>
+                                        <div class="notifi-dropdown js-dropdown">
+                                            <div class="notifi__title">
+                                                <p>You have <%= email_count %> Notifications</p>
+                                            </div>
+
+                                            <% email.forEach( function(e){
+                                                if(e.status === 'unread'){ %>
+                                            <div class="notifi__item">
+                                                <div class="bg-c1 img-cir img-40">
+                                                    <i class="zmdi zmdi-email-open"></i>
+                                                </div>
+                                                <div class="content">
+                                                    <p>You got a email notification</p>
+                                                    <span class="date"><h6><%= e.name %></h6>
+                                                        sub: <%= e.subject%>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <%
+                                                };
+                                            }); 
+                                            %>
+
+                                            <div class="notifi__footer">
+                                                <a href="#">All notifications</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="account-wrap">
+                                    <div class="account-item clearfix js-item-menu">
+                                        <div class="image">
+                                            <img src="/abc/images/icon/avatar-01.jpg" alt="John Doe" />
+                                        </div>
+                                        <div class="content">
+                                            <a class="js-acc-btn" href="#"><%= user.uname %></a>
+                                        </div>
+                                        <div class="account-dropdown js-dropdown">
+                                            <div class="info clearfix">
+                                                <div class="image">
+                                                    <a href="#">
+                                                        <img src="/abc/images/icon/avatar-01.jpg" alt="John Doe" />
+                                                    </a>
+                                                </div>
+                                                <div class="content">
+                                                    <h5 class="name">
+                                                        <a href="#"><%= user.uname %></a>
+                                                    </h5>
+                                                    <span class="email"><%= user.email %></span>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="/buyer/profile">
+                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                </div>
+                                                <div class="account-dropdown__item">
+                                                    <a href="#">
+                                                        <i class="zmdi zmdi-settings"></i>Setting</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__footer">
+                                                <a href="/buyer/logout">
+                                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <h2 class="title-1">overview</h2>
+                                    <button class="au-btn au-btn-icon au-btn--blue">
+                                        <i class="zmdi zmdi-plus"></i>add item</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-t-25">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c1">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-account-o"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>10368</h2>
+                                                <span>members online</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart1"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c2">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-shopping-cart"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>388,688</h2>
+                                                <span>items solid</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart2"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c3">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-calendar-note"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>1,086</h2>
+                                                <span>this week</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart3"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c4">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <i class="zmdi zmdi-money"></i>
+                                            </div>
+                                            <div class="text">
+                                                <h2>$1,060,386</h2>
+                                                <span>total earnings</span>
+                                            </div>
+                                        </div>
+                                        <div class="overview-chart">
+                                            <canvas id="widgetChart4"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="au-card recent-report">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2">recent reports</h3>
+                                        <div class="chart-info">
+                                            <div class="chart-info__left">
+                                                <div class="chart-note">
+                                                    <span class="dot dot--blue"></span>
+                                                    <span>products</span>
+                                                </div>
+                                                <div class="chart-note mr-0">
+                                                    <span class="dot dot--green"></span>
+                                                    <span>services</span>
+                                                </div>
+                                            </div>
+                                            <div class="chart-info__right">
+                                                <div class="chart-statis">
+                                                    <span class="index incre">
+                                                        <i class="zmdi zmdi-long-arrow-up"></i>25%</span>
+                                                    <span class="label">products</span>
+                                                </div>
+                                                <div class="chart-statis mr-0">
+                                                    <span class="index decre">
+                                                        <i class="zmdi zmdi-long-arrow-down"></i>10%</span>
+                                                    <span class="label">services</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="recent-report__chart">
+                                            <canvas id="recent-rep-chart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="au-card chart-percent-card">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2 tm-b-5">char by %</h3>
+                                        <div class="row no-gutters">
+                                            <div class="col-xl-6">
+                                                <div class="chart-note-wrap">
+                                                    <div class="chart-note mr-0 d-block">
+                                                        <span class="dot dot--blue"></span>
+                                                        <span>products</span>
+                                                    </div>
+                                                    <div class="chart-note mr-0 d-block">
+                                                        <span class="dot dot--red"></span>
+                                                        <span>services</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6">
+                                                <div class="percent-chart">
+                                                    <canvas id="percent-chart"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="/abc/vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="/abc/vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="/abc/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="/abc/vendor/slick/slick.min.js">
+    </script>
+    <script src="/abc/vendor/wow/wow.min.js"></script>
+    <script src="/abc/vendor/animsition/animsition.min.js"></script>
+    <script src="/abc/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="/abc/vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="/abc/vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="/abc/vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="/abc/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="/abc/vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="/abc/vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="/abc/js/main.js"></script>
+
 </body>
+
 </html>
+<!-- end document-->
