@@ -64,22 +64,12 @@ router.post('/search', (req, res) => {
 
 
 router.get('/profile', (req, res) => {
-	var user =   req.session.user;
-	var profile = {
-		id: user.id,
-		full_name: user.full_name,
-		username: user.username,
-		password: user.password,
-		email: user.email,
-		contact: user.contact,
-		address: user.address
-	};
 	res.render('buyer/profile', {
 				email: req.session.data.email, 
 				email_count: req.session.data.email_count,
 				msg: req.session.data.msg, 
 				msg_count: req.session.data.msg_count,
-				profile: profile});
+				profile: req.session.user});
 	
 });
 
