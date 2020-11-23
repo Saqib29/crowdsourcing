@@ -29,9 +29,12 @@ router.get('/buyerController', (req, res) => {
 
 	msgModel.msgCount(username, function(status){
 		msgModel.emailCount(username, function(result){
-
-			console.log(status);
-			console.log(result);
+			req.session.data = {
+				msg_count: status.length,
+				email_count: result.length,
+				msg: status,
+				email:result
+			};
 
 			res.render('buyer/index', {
 				email: result, 
@@ -58,8 +61,20 @@ router.get('/profile', (req, res) => {
 		contact: user.contact,
 		address: user.address
 	};
-
-	res.render('buyer/profile', profile);
+	var username = {
+		name: user.full_name,
+		uname: user.username,
+		email: user.email,
+		status: 'unread'
+	};
+	res.render('buyer/profile', {
+				email: req.session.data.email, 
+				email_count: req.session.data.email_count,
+				msg: req.session.data.msg, 
+				msg_count: req.session.data.msg_count,
+				user: username,
+				profile: profile});
+	
 });
 
 
