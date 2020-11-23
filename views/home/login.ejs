@@ -81,10 +81,16 @@
                                 <div class="form-group">
                                     <label>Username</label>
                                     <input class="au-input au-input--full" type="text" name="username" placeholder="username"/>
+                                    <% if(username != null) { %>
+                                         <span style="color: rgb(206, 53, 53); font-size: 14px;">*<%= username.msg %></span>
+                                    <%  } %>
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input class="au-input au-input--full" type="password" name="password" placeholder="password"/>
+                                    <% if(password != null) { %>
+                                        <span style="color: rgb(206, 53, 53); font-size: 14px">*<%= password.msg %></span>
+                                   <%  } %>
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
