@@ -2,6 +2,7 @@ const express 	= require('express');
 const main_controll     = require.main.require('./models/main_controll');
 const category	 		= require.main.require('./models/category');
 const operation 		= require.main.require('./models/admioperation');
+const msgModel			= require.main.require('./models/msgModel');
 const router 			= express.Router();
 
 router.get('*', (req, res, next) => {
@@ -13,14 +14,30 @@ router.get('*', (req, res, next) => {
 	}
 });
 
-router.get('/adminController', (req, res)=>{
-	
+router.get('/adminController', (req, res) => {
 	var user =   req.session.user;
 
-	res.render('admin/index', {
-		uname: user.username
+	var username = {
+		name: user.full_name,
+		uname: user.username,
+		email: user.email,
+		status: 'unread'
+	};
+
+	msgModel.msgCount(username, function(status){
+		msgModel.emailCount(username, function(result){
+
+			console.log(status);
+			console.log(result);
+
+			res.render('admin/index', {
+				email: result, 
+				email_count: result.length,
+				msg: status, 
+				msg_count: status.length,
+				user: username});
+		});	
 	});
-	
 });
 
 // profile
