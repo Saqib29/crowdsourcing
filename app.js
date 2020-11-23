@@ -22,6 +22,7 @@ app.set('view engine', 'ejs');
 // middleware
 app.use('/abc', express.static('assets'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(expressSession({ secret: 'secrete value', saveUninitialized: true, resave: false }));
 
 

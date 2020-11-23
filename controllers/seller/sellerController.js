@@ -106,6 +106,21 @@ router.post('/resetpassword', (req, res) => {
 	}
 });
 
+// message
+router.get('/message/:id', (req, res) => {
+	main_controll.getById(req.params.id, (result) => {
+		var msg = {
+			sender: req.session.user.email,
+			reciever: result[0].email 
+		}
+		res.render('seller/sendmessage', { msg : msg });
+		console.log(result);
+	});
+	// console.log(req.params.id);
+	
+});
+
+
 // logout router
 router.get('/logout', (req, res) => {
 	req.session.user = null;
