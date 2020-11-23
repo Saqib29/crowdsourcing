@@ -290,7 +290,13 @@ router.get('/delete/:id', (req, res) => {
 
 	post_workModel.getByPostId(post_id, function (status) {
 		
-		res.render('buyer/delete_post', {delete_post: status});
+		res.render('buyer/delete_post', {
+			email: req.session.data.email, 
+			email_count: req.session.data.email_count,
+			msg: req.session.data.msg, 
+			msg_count: req.session.data.msg_count,
+			user: req.session.user,
+			delete_post: status});
 	});
 });
 
@@ -319,7 +325,13 @@ router.get('/post_list', (req, res) => {
 	};
 	
 	post_workModel.getAll(user_id,function(status){
-		res.render('buyer/post_list', {posts: status});
+		res.render('buyer/post_list', {
+			email: req.session.data.email, 
+			email_count: req.session.data.email_count,
+			msg: req.session.data.msg, 
+			msg_count: req.session.data.msg_count,
+			user: req.session.user,
+			posts: status});
 	});
 
 });
@@ -347,7 +359,13 @@ router.get('/available/:id/:status', (req, res) => {
 router.get('/sellers', (req, res) => {
 	
 	sellersModel.getAll(function(status){
-		res.render('buyer/sellers', {sellers: status});
+		res.render('buyer/sellers', {
+			email: req.session.data.email, 
+			email_count: req.session.data.email_count,
+			msg: req.session.data.msg, 
+			msg_count: req.session.data.msg_count,
+			user: req.session.user,
+			sellers: status});
 	});
 
 });
