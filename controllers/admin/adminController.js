@@ -83,7 +83,13 @@ router.get('/profile', (req, res) => {
 		// 	address: result[0].address,
 		// 	user_roll: result[0].user_roll
 		// };
-		res.render('admin/profile', { user : result[0] });
+		res.render('admin/profile', { 
+			email: req.session.data.email, 
+				email_count: req.session.data.email_count,
+				msg: req.session.data.msg, 
+				msg_count: req.session.data.msg_count,
+				profile: result[0]
+			});
 	});
 });
 
@@ -91,7 +97,13 @@ router.get('/profile', (req, res) => {
 // profile edit
 router.get('/edit_profile/:id', (req, res) => {
 	main_controll.getById(req.params.id, (result) => {
-		res.render('admin/edit_profile', result[0]);
+		res.render('admin/edit_profile', { 
+			email: req.session.data.email, 
+				email_count: req.session.data.email_count,
+				msg: req.session.data.msg, 
+				msg_count: req.session.data.msg_count,
+				profile: result[0]
+			});
 	});
 });
 router.post('/edit_profile/:id', (req, res) => {
@@ -123,7 +135,16 @@ router.post('/addAdmin', (req, res) => {
 router.get('/Categories', (req, res) => {
 	
 	category.getCategories((results) => {
-		res.render('admin/categories', {users: results});
+			res.render('admin/categories', {
+				email: req.session.data.email, 
+				email_count: req.session.data.email_count,
+				msg: req.session.data.msg, 
+				msg_count: req.session.data.msg_count,
+				users: results,
+				uname: req.session.user.username,
+				name: req.session.user.full_name,
+				email: req.session.user.email
+			});
 	});
 });
 
@@ -152,7 +173,6 @@ router.post('/addCategories', (req, res) => {
 
 router.get('/adminlist', (req, res) => {
 	main_controll.get_all_admin((results) => {
-		console.log(req.session.data.email_count);
 
 		res.render('admin/adminlist', {
 				email: req.session.data.email, 
@@ -161,7 +181,7 @@ router.get('/adminlist', (req, res) => {
 				msg_count: req.session.data.msg_count,
 				users: results,
 				uname: req.session.user.username,
-				name: req.session.user.name,
+				name: req.session.user.full_name,
 				email: req.session.user.email
 			});
 	});
@@ -180,7 +200,16 @@ router.get('/adminlist/delete/:id', (req, res) => {
 router.get('/buyerlist', (req, res) => {
 	main_controll.get_all_buyer((results) => {
 		// console.log(results);
-		res.render('admin/buyerlist', { users: results });
+		res.render('admin/buyerlist', {
+				email: req.session.data.email, 
+				email_count: req.session.data.email_count,
+				msg: req.session.data.msg, 
+				msg_count: req.session.data.msg_count,
+				users: results,
+				uname: req.session.user.username,
+				name: req.session.user.full_name,
+				email: req.session.user.email
+			});
 	});
 });
 router.get('/buyerlist/delete/:id', (req, res) => {
@@ -197,7 +226,16 @@ router.get('/buyerlist/delete/:id', (req, res) => {
 router.get('/sellerlist', (req, res) => {
 	main_controll.get_all_seller((results) => {
 		// console.log(results);
-		res.render('admin/sellerlist', { users: results });
+		res.render('admin/sellerlist', {
+				email: req.session.data.email, 
+				email_count: req.session.data.email_count,
+				msg: req.session.data.msg, 
+				msg_count: req.session.data.msg_count,
+				users: results,
+				uname: req.session.user.username,
+				name: req.session.user.full_name,
+				email: req.session.user.email
+			});
 	});
 });
 router.get('/sellerlist/delete/:id', (req, res) => {
@@ -229,6 +267,23 @@ router.post('/resetpassword', (req, res) => {
 		res.send('<h1>Password not matched!</h1>');
 	}
 });
+
+router.get('/calendar', (req, res) => {
+	
+	res.render('calendar', {
+		email: req.session.data.email, 
+		email_count: req.session.data.email_count,
+		msg: req.session.data.msg, 
+		msg_count: req.session.data.msg_count,
+		uname: req.session.user.username,
+		name: req.session.user.full_name,
+		email: req.session.user.email,
+		profile: req.session.user
+	});
+});
+
+
+
 
 router.get('/logout', (req, res) => {
 	req.session.user = null;
