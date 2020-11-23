@@ -27,8 +27,8 @@ router.get('/adminController', (req, res) => {
 	msgModel.msgCount(username, function(status){
 		msgModel.emailCount(username, function(result){
 
-			console.log(status);
-			console.log(result);
+			// console.log(status);
+			// console.log(result);
 
 			res.render('admin/index', {
 				email: result, 
@@ -39,6 +39,18 @@ router.get('/adminController', (req, res) => {
 		});	
 	});
 });
+
+//  admin search opearation
+router.post('/search', (req, res) => {
+	console.log(req.body);
+	main_controll.search(req.body.search, (results) => {
+		res.json({
+			result : results
+		});
+	});
+	// console.log('search');
+});
+
 
 // profile
 router.get('/profile', (req, res) => {
