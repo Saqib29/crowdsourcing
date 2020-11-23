@@ -24,23 +24,39 @@ router.get('/adminController', (req, res) => {
 		status: 'unread'
 	};
 
-	msgModel.msgCount(username, function(status){
-		msgModel.emailCount(username, function(result){
-			req.session.data = {
-				msg_count: status.length,
-				email_count: result.length,
-				msg: status,
-				email:result
-			};
+	main_controll.get_all_admin((admin_result) => {
+		main_controll.get_all_buyer((buyer_result) => {
+			main_controll.get_all_seller((seller_result) => {
+				var overview = {
+					admin: admin_result.length,
+					buyer: buyer_result.length,
+					seller: seller_result.length
+				}
 
-			res.render('admin/index', {
-				email: result, 
-				email_count: result.length,
-				msg: status, 
-				msg_count: status.length,
-				user: username});
-		});	
+				msgModel.msgCount(username, function(status){
+					msgModel.emailCount(username, function(result){
+						req.session.data = {
+							msg_count: status.length,
+							email_count: result.length,
+							msg: status,
+							email:result
+						};
+			
+						res.render('admin/index', {
+							email: result, 
+							email_count: result.length,
+							msg: status, 
+							msg_count: status.length,
+							user: username,
+							overview: overview
+						});
+					});	
+				});
+			});
+		});
 	});
+	
+	
 });
 
 //  admin search opearation
