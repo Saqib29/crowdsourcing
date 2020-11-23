@@ -26,9 +26,12 @@ router.get('/adminController', (req, res) => {
 
 	msgModel.msgCount(username, function(status){
 		msgModel.emailCount(username, function(result){
-
-			// console.log(status);
-			// console.log(result);
+			req.session.data = {
+				msg_count: status.length,
+				email_count: result.length,
+				msg: status,
+				email:result
+			};
 
 			res.render('admin/index', {
 				email: result, 
@@ -133,8 +136,18 @@ router.post('/addCategories', (req, res) => {
 
 router.get('/adminlist', (req, res) => {
 	main_controll.get_all_admin((results) => {
-		console.log(results);
-		res.render('admin/adminlist', { users: results });
+		console.log(req.session.data.email_count);
+
+		res.render('admin/adminlist', {
+				email: req.session.data.email, 
+				email_count: req.session.data.email_count,
+				msg: req.session.data.msg, 
+				msg_count: req.session.data.msg_count,
+				users: results,
+				uname: req.session.user.username,
+				name: req.session.user.name,
+				email: req.session.user.email
+			});
 	});
 });
 router.get('/adminlist/delete/:id', (req, res) => {
