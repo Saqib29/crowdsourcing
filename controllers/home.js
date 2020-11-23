@@ -1,6 +1,7 @@
-const express           = require('express');
-const main_controll     = require.main.require('./models/main_controll');
-const router            = express.Router();
+const express                     = require('express');
+const { check, validationResult } = require('express-validator');
+const main_controll               = require.main.require('./models/main_controll');
+const router                      = express.Router();
 
 // login
 router.get('/login', (req, res) => {
@@ -18,58 +19,79 @@ router.get('/login', (req, res) => {
         }
     } 
     else {
-        res.render('home/login');
+        res.render('home/login', { username : null, password : null });
     }
 
 });
 
-router.post('/login', (req, res) => {
-    var user = {
-        username: req.body.username,
-        password: req.body.password
-    }
+router.post('/login',
+    [
+        // check by express-validator
+        check('username').not().isEmpty().trim().escape().withMessage('must type valid username'),
+        check('password').not().isEmpty().trim().escape().withMessage('must type correct password')
+    ], 
+    (req, res) => {
 
-    // validatting if the person existed on database
-    main_controll.validate(user, (status) => {
-
-        // if user exist in database, go ahead
-        if(status) {
-            
-            // getting logined persons basic informations
-            main_controll.get_user(user, (result) => {
-
-                // session stored of logger
-                req.session.user = {
-                    id        : result[0].id,
-                    full_name : result[0].full_name,
-                    username  : result[0].username,
-                    password  : result[0].password,
-                    email     : result[0].email,
-                    contact   : result[0].contact,
-                    address   : result[0].address,
-                    user_roll : result[0].user_roll
-                };
-
-                // checking if the user admin or buyer or seller
-                if(result[0].user_roll.toLowerCase() == 'admin') {
-                    res.redirect('/admin/adminController');
-                    // console.log('admin');
-                } 
-                else if(result[0].user_roll.toLowerCase() == 'buyer') {
-                    res.redirect('/buyer/buyerController');
-                    // console.log('buyer');
-                } 
-                else if (result[0].user_roll.toLowerCase() == 'seller') {
-                    res.redirect('/seller/sellerController');
-                    // console.log('seller');
-                }
-
-            });
+        const error = validationResult(req);
+        // console.log(error.isEmpty());
+        if(!error.isEmpty()){
+            res.render('home/login', { username : error.array()[0], password : error.array()[1] });
+            // console.log(error.array());
+            // console.log('error');
         } else {
-            res.render('home/not_register');
+            
+
+            var user = {
+                username: req.body.username,
+                password: req.body.password
+            }
+    
+            console.log(user);
+    
+            // validatting if the person existed on database
+            main_controll.validate(user, (status) => {
+    
+                // if user exist in database, go ahead
+                if(status) {
+                    
+                    // getting logined persons basic informations
+                    main_controll.get_user(user, (result) => {
+    
+                        // session stored of logger
+                        req.session.user = {
+                            id        : result[0].id,
+                            full_name : result[0].full_name,
+                            username  : result[0].username,
+                            password  : result[0].password,
+                            email     : result[0].email,
+                            contact   : result[0].contact,
+                            address   : result[0].address,
+                            user_roll : result[0].user_roll
+                        };
+    
+                        // checking if the user admin or buyer or seller
+                        if(result[0].user_roll.toLowerCase() == 'admin') {
+                            res.redirect('/admin/adminController');
+                            // console.log('admin');
+                        } 
+                        else if(result[0].user_roll.toLowerCase() == 'buyer') {
+                            res.redirect('/buyer/buyerController');
+                            // console.log('buyer');
+                        } 
+                        else if (result[0].user_roll.toLowerCase() == 'seller') {
+                            res.redirect('/seller/sellerController');
+                            // console.log('seller');
+                        }
+    
+                    });
+                } else {
+                    res.render('home/not_register');
+                }
+    
+            });
         }
 
-    });
+        
 });
 
 // registration
