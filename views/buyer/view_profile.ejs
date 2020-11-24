@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title><%= user.username %> | Portal</title>
+    <title><%= profile.username %>| Profile</title>
 
     <!-- Fontfaces CSS-->
     <link href="/abc/css/font-face.css" rel="stylesheet" media="all">
@@ -39,45 +39,76 @@
     <div class="page-wrapper">
 
         <!-- MENU SIDEBAR-->
-        <aside class="menu-sidebar d-none d-lg-block">
+        <aside class="menu-sidebar2">
             <div class="logo">
                 <a href="#">
-                    <h3>Crowd Sourcing</h3>
+                    <h3 style="color: white;">Crowd Sourcing</h3>
                 </a>
             </div>
-            <div class="menu-sidebar__content js-scrollbar1">
-                <nav class="navbar-sidebar">
+            <div class="menu-sidebar2__content js-scrollbar1">
+                <div class="account2">
+                    <div class="image img-cir img-120">
+                        <img src="/abc/images/icon/avatar-big-01.jpg" alt="John Doe" />
+                    </div>
+                    <h4 class="name"><%= profile.full_name %></h4>
+                </div>
+                <nav class="navbar-sidebar2">
                     <ul class="list-unstyled navbar__list">
                         <li class="active has-sub">
-                            <a class="js-arrow" href="/buyer/buyerController">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                            <a href="/buyer/buyerController">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard
+                            </a>
                         </li>
                         <li>
-                            <a href="/buyer/profile"><i class="fas fa-user"></i>Profile</a>
+                            <a href="#">
+                                <i class="fas fa-user"></i>Profile</a>
                         </li>
+                       
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                                <i class="fas fa-table"></i>Tables</a>
+                                <i class="fas fa-table"></i>Tables
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                   <a href="/buyer/sellers"><i class="fas fa-users"></i>Sellers</a>
-                                   <li><a href="/buyer/post_list"><i class="fas fa-list-alt"></i>Posts</a></li>
+                                    <a href="/buyer/sellers">
+                                        <i class="fas fa-users"></i>Sellers</a>
+                                </li>
+                                <li>
+                                    <a href="/buyer/post_list">
+                                        <i class="fas fa-list-alt"></i>Posts</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                               <i class="fas fa-cogs"></i> Operation</a>
+                                <i class="fas fa-cogs"></i>Operation
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li><a href="/buyer/post"><i class="fas fa-plus-circle"></i>Write Post </a></li>  
-                                
+                                <li>
+                                    <a href="/buyer/post">
+                                        <i class="fas fa-plus-circle"></i>Write Post</a>
+                                </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="calendar.html">
+                                <i class="fas fa-calendar-alt"></i>Calendar</a>
                         </li>
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
-                               <i class="fas fa-address-card"></i>Contact</a>
+                                <i class="fas fa-address-card"></i>Contact</a>
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li><a href="/buyer/email"><i class="fas fa-plus-circle"></i>Send Email </a></li>  
+                                 <li><a href="/buyer/email"><i class="fas fa-plus-circle"></i>Send Email </a></li>  
                             </ul>
                         </li>
                     </ul>
@@ -94,7 +125,7 @@
                     <div class="container-fluid">
                         <div class="header-wrap">
                             <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" id="search" placeholder="Search by sellers category..." />
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search by sellers category..." />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
@@ -169,7 +200,7 @@
                                             <img src="/abc/images/icon/avatar-01.jpg" alt="John Doe" />
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#"><%= user.full_name %></a>
+                                            <a class="js-acc-btn" href="#"><%= profile.username %></a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
@@ -180,9 +211,9 @@
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#"><%= user.username %></a>
+                                                        <a href="#"><%= profile.username %></a>
                                                     </h5>
-                                                    <span class="email"><%= user.email %></span>
+                                                    <span class="email"><%= profile.email %></span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__body">
@@ -207,55 +238,73 @@
                     </div>
                 </div>
             </header>
+            <!-- HEADER DESKTOP-->
+
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                        <div class="row m-t-30">
-                            <div class="col-md-12">
-                            	<h4>Seller List</h4><br>
-                                <!-- DATA TABLE-->
-                                <div class="table-responsive m-b-40">
-                                    <table class="table table-borderless table-data3" id="myTable">
-                                        <thead style="background-color: #404040">
+                      <div class="row" style="width: 200%; ">
+                            <div class="col-lg-6" >
+                                <div class="au-card recent-report"style="height: 100%;">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2">User Profile</h3>
+                                        <table style="position: relative;left: 20px;">
+											<tr>
+												<td style="width: 40%; height: 40px;">ID</td>
+												<td><%= user_info.id%></td>
+					
+											</tr><br>
+	
+											<tr >
+												<td style="width: 40%; height: 40px;">Name</td>
+												<td ><%= user_info.full_name%></td>
+											</tr>
                                             <tr>
-                                                <th style="  padding: 6px 10px;">ID</th>
-                                                <th style="  padding: 6px 10px;">Name</th>
-                                                <th style="  padding: 6px 10px;">Category</th>
-                                                <th style="  padding: 6px 10px;">Buyer Name</th>
-                                                <th style="  padding: 6px 10px;">Project Title</th>
-                                                <th style="  padding: 6px 10px;">action</th>
+                                                <td style="width: 40%; height: 40px;">Category</td>
+                                                <td><%= seller_info.category_name%></td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                        	<% sellers.forEach( function(s){ %>
-												<tr  id="all_sellers">
-													<td style="  padding: 6px 3px;"><%= s.user_id %></td>
-													<td style="  padding: 6px 3px;"><%= s.name %></td>
-													<td style="  padding: 6px 3px;"><%= s.category_name %></td>
-													<td style="  padding: 6px 3px;"><%= s.buyer_name %></td>
-													<td style="  padding: 6px 3px;"><%= s.project_title %></td>
+                                            <tr>
+                                                <td style="width: 40%; height: 40px;">Project Title</td>
+                                                <td><%= seller_info.project_title%></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 40%; height: 40px;">Buyer Name</td>
+                                                <td><%= seller_info.buyer_name%></td>
+                                            </tr>
 
-													<td style="  padding: 6px 3px;">
-														<a href="/buyer/message/<%=s.user_id%>"><button type="button" class="btn btn-outline-success btn-sm">Chat</button></a>   |
-														<a href="/buyer/details/<%=s.user_id%>"><button type="button" class="btn btn-outline-primary btn-sm">Details</button></a>
+											<tr>
+												<td style="width: 40%; height: 40px;">Address</td>
+												<td><%= user_info.address%></td>
+											</tr>
+											<tr>
+												<td style="width: 40%; height: 40px;">Contact</td>
+												<td><%= user_info.contact%></td>
+											</tr>
+											<tr>
+												<td style="width: 40%; height: 40px;">Email</td>
+												<td><%= user_info.email%></td>
+											</tr>
+											<tr>
+												<td></td>
+												<td></td>
+											</tr>
 
-													</td>
-												</tr>
-											<%
-												}); 
-											%> 
-                                        </tbody>
-                                    </table>
+										</table><br>
+                                    </div>
                                 </div>
-                                <!-- END DATA TABLE-->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
         </div>
-            <!-- Jquery JS-->
+
+    </div>
+
+    <!-- Jquery JS-->
     <script src="/abc/vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
     <script src="/abc/vendor/bootstrap-4.1/popper.min.js"></script>
@@ -278,49 +327,6 @@
 
     <!-- Main JS-->
     <script src="/abc/js/main.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
-	<script>
-        $(document).ready(() => {
-            $("#search").keyup(() => {
-                
-				var searchField = $('#search').val();
-                // alert('search');
-                // ajax calling
-                $.ajax({
-                    url: "/buyer/search",
-                    data: {search : searchField},
-                    method: "POST",
-                    ContentType: "application/x-www-form-urlencoded",
-                    success: (result) => {
-						//    $('#all_sellers').remove();
-						   for(i =0; i< result.length; i++){
-							
-							   var td = '<tr id="all_sellers"><td> ${result[i].user_id} </td>'+
-								'<td>'+ result[i].name +'</td>'+
-								'<td>'+ result[i].category_name +'</td>'+
-								'<td>'+ result[i].buyer_name '</td>'+
-								'<td>'+ result[i].project_title '</td>'+
-						
-								'<td>'+
-									'<a href="/buyer/message/'+result[i].user_id+'><button style="background-color: green;">Chat</button></a>'+
-									'<a href="/buyer/message/' +result[i].user_id +'"><button style="background-color: lightblue;">Details</button></a>'+
-
-								'</td></tr>';
-
-							   $('#myTable').append(td);
-						   }
-                    },
-                    error: (err) => {
-                        alert(err);
-                    }
-                });
-
-            });
-        });
-    </script>
 
 </body>
 
