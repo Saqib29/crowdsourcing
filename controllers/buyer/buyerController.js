@@ -27,23 +27,45 @@ router.get('/buyerController', (req, res) => {
 		status: 'unread'
 	};
 
-	msgModel.msgCount(username, function(status){
-		msgModel.emailCount(username, function(result){
-			req.session.data = {
-				msg_count: status.length,
-				email_count: result.length,
-				msg: status,
-				email:result
-			};
+	main_controll.get_all_users((all_users) => {
+		main_controll.get_all_seller((all_selers) => {
+			main_controll.get_all_category((all_category) => {
+				post_workModel.get_postBY_buyerId(req.session.user.id, (own_post) => {
+					var overview = {
+						users: all_users.length,
+						sellers: all_selers.length,
+						category: all_category.length,
+						own_post: own_post.length
+					};
 
-			res.render('buyer/index', {
-				email: result, 
-				email_count: result.length,
-				msg: status, 
-				msg_count: status.length,
-				user: username});
-		});	
+					msgModel.msgCount(username, function(status){
+						msgModel.emailCount(username, function(result){
+							req.session.data = {
+								msg_count: status.length,
+								email_count: result.length,
+								msg: status,
+								email:result
+							};
+				
+							res.render('buyer/index', {
+								email: result, 
+								email_count: result.length,
+								msg: status, 
+								msg_count: status.length,
+								user: username,
+								overview: overview
+							});
+						});	
+					});
+
+				});
+
+
+			});
+		});
 	});
+
+	
 });
 
 

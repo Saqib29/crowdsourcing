@@ -61,5 +61,10 @@ module.exports = {
             }
         });
     },
-
+    get_postBY_buyerId: (buyerId, callback) => {
+        var sql = `Select * from post_table WHERE buyer_id=?`;
+        db.getResults(sql, [buyerId], (results) => {
+            callback(results);
+        });
+    }
 }

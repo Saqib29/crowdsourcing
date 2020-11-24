@@ -91,5 +91,18 @@ module.exports = {
         db.getResults(sql, null, (result) => {
             callback(result);
         });
+    },
+    get_all_users: (callback) => {
+        var sql = `SELECT * FROM user`;
+        db.getResults(sql, null, (results) => {
+            callback(results);
+        });
+    },
+    get_all_category: (callback) => {
+        var sql = `SELECT * FROM category`;
+
+        db.getResults(sql, null, (results) => {
+            callback(results);
+        });
     }
 }
