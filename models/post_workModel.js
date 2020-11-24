@@ -67,4 +67,10 @@ module.exports = {
             callback(results);
         });
     }
+    // get_all_posts: (callback) => {
+    //     var sql = `SELECT * FROM post_table`;
+    //     db.getResults(sql, null, (results) => {
+    //         callback(results);
+    //     });
+    // }
 }
