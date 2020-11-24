@@ -1,5 +1,6 @@
 const express           = require('express');
 const nodemailer 		= require('nodemailer');
+const { check, validationResult } = require('express-validator');
 const msgModel			= require.main.require('./models/msgModel');
 const main_controll		= require.main.require('./models/main_controll');
 const post_workModel	= require.main.require('./models/post_workModel');
@@ -161,8 +162,8 @@ router.post('/email', (req, res)=>{
   		let transporter = nodemailer.createTransport({
     		service: "Gmail",
     		auth: {
-        		user: 'alzamiarafat00@gmail.com',
-        		pass: '01780944266'
+        		user: '',
+        		pass: ''
     		},
 
     		tls:{
@@ -188,6 +189,35 @@ router.post('/email', (req, res)=>{
   		});
 	});
 
+});
+router.get('/details/:id', (req, res) => {
+
+	var user_id = {id: req.params.id};
+
+	main_controll.getSellerId(user_id, function(result) {
+
+		sellersModel.getById(user_id,function (status) {
+			console.log(status);
+			console.log(result);
+
+			res.render('buyer/view_profile',{
+				email: req.session.data.email, 
+				email_count: req.session.data.email_count,
+				msg: req.session.data.msg, 
+				msg_count: req.session.data.msg_count,
+				profile: req.session.user, 
+				user_info: result[0],
+				seller_info: status[0]
+			});
+		});
+		
+		/*res.render('buyer/view_profile',{msg: result});*/
+	});
+
+	/*sellersModel.getById(user_id, function(status) {
+		
+	})*/
+	
 });
 
 
@@ -235,16 +265,86 @@ router.post('/message/:id', (req, res)=>{
 //            POST Controller>>>>>>>>>>>>>>>>>>>>>>>
 
 router.get('/post', (req, res) => {
-	var user =   req.session.user;
-
-	var username = {
-		id: user.id,
-		fname: user.full_name
-	};
-
-	res.render('buyer/post_work', username);
+	res.render('buyer/post_work', {
+		price: null,
+		email: req.session.data.email, 
+		email_count: req.session.data.email_count,
+		msg: req.session.data.msg, 
+		msg_count: req.session.data.msg_count,
+		profile: req.session.user, 
+	});
 
 });
+
+router.post('/post',
+	[
+       check('amount').not().isEmpty().trim().escape().withMessage('price require.'),
+    ],
+
+    (req, res) => {
+    	const error = validationResult(req);
+        if(!error.isEmpty()){
+            res.render('buyer/post_work', { price : error.array()[0], user: req.session.user });    
+        }
+        else {
+        	var post = {
+				id: req.body.id,
+				name: req.body.name,
+				title: req.body.title,
+				status: req.body.status,
+				post_body: req.body.post_body,
+				amount: req.body.amount
+			};
+			post_workModel.post_work(post,function(status){
+				if(status == false){
+					res.send('post submitted....');
+				}
+
+			});
+        }
+
+});
+
+
+
+
+
+
+
+
+
+
+/*{
+	[
+        // check by express-validator
+        check('username').not().isEmpty().trim().escape().withMessage('must type valid username'),
+        check('password').not().isEmpty().trim().escape().withMessage('must type correct password')
+    ],
+    (req, res) => {
+    	 const error = validationResult(req);
+    	 if(!error.isEmpty()){
+            res.render('home/login', { username : error.array()[0], password : error.array()[1] });
+            // console.log(error.array());
+            // console.log('error');
+        }else {
+        	var post = {
+				id: req.body.id,
+				name: req.body.name,
+				title: req.body.title,
+				status: req.body.status,
+				post_body: req.body.post_body,
+				amount: req.body.amount
+			};
+			post_workModel.post_work(post,function(status){
+				if(status == false){
+			res.send('post submitted....');
+
+			});
+
+        }
+    }
+
+});*/
 
 router.get('/edit_post/:id', (req, res) => {
 	
@@ -276,25 +376,7 @@ router.post('/edit_post/:id', (req, res) => {
 	});
 });
 
-router.post('/post', (req, res) => {
-	var post = {
-		id: req.body.id,
-		name: req.body.name,
-		title: req.body.title,
-		status: req.body.status,
-		post_body: req.body.post_body,
-		amount: req.body.amount
-	};
-	post_workModel.post_work(post,function(status){
 
-		if(status == false){
-			res.send('post submitted....');
-
-		}
-
-	});
-
-});
 
 router.get('/delete/:id', (req, res) => {
 	

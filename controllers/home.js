@@ -33,10 +33,10 @@ router.post('/login',
     (req, res) => {
 
         const error = validationResult(req);
-        // console.log(error.isEmpty());
+         console.log(error.isEmpty());
         if(!error.isEmpty()){
             res.render('home/login', { username : error.array()[0], password : error.array()[1] });
-            // console.log(error.array());
+             console.log(error.array());
             // console.log('error');
         } else {
             
@@ -45,8 +45,6 @@ router.post('/login',
                 username: req.body.username,
                 password: req.body.password
             }
-    
-            console.log(user);
     
             // validatting if the person existed on database
             main_controll.validate(user, (status) => {
