@@ -1,6 +1,7 @@
 const express           = require('express');
 const operation 		= require.main.require('./models/selleroperation');
 const main_controll		= require.main.require('./models/main_controll');
+const msgModel			= require.main.require('./models/msgModel');
 const router            = express.Router();
 const upload			= require('express-fileupload');
 const app 				= express();
@@ -20,12 +21,45 @@ router.get('*', (req, res, next) => {
 
 // index/deshboard router
 router.get('/sellerController', (req, res) => {
-    res.render('seller/index', { user : req.session.user });
+	var user =   req.session.user;
+
+	var username = {
+		name: user.full_name,
+		uname: user.username,
+		email: user.email,
+		status: 'unread'
+	};
+
+	msgModel.msgCount(username, function(status){
+		msgModel.emailCount(username, function(result){
+			req.session.data = {
+				msg_count: status.length,
+				email_count: result.length,
+				msg: status,
+				email:result
+			};
+
+			res.render('seller/index', {
+				email: result, 
+				email_count: result.length,
+				msg: status, 
+				msg_count: status.length,
+				 user : req.session.user
+				});
+		});	
+	});
 });
 
 // profile router
 router.get('/profile', (req, res) => {
-	res.render('seller/profile', { profile : req.session.user });
+	res.render('seller/profile', {
+
+	email: req.session.data.email, 
+	email_count: req.session.data.email_count,
+	msg: req.session.data.msg, 
+	msg_count: req.session.data.msg_count,
+	profile: req.session.user});
+
 });
 
 // file upload
@@ -35,7 +69,12 @@ router.post('/fileupload', (req, res) => {
 
 // edit_profile
 router.get('/edit_profile/:id', (req, res) => {
-	res.render('seller/edit_profile', { user : req.session.user });
+	res.render('seller/edit_profile', { 
+		email: req.session.data.email, 
+		email_count: req.session.data.email_count,
+		msg: req.session.data.msg, 
+		msg_count: req.session.data.msg_count,
+		profile: req.session.user});
 });
 
 router.post('/edit_profile/:id', (req, res) => {
