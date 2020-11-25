@@ -104,5 +104,11 @@ module.exports = {
         db.getResults(sql, null, (results) => {
             callback(results);
         });
+    },
+    getSellerId:(id, callback) => {
+        var sql = `SELECT * FROM user WHERE id =?`;
+        db.getResults(sql, [id.id], (result) => {
+            callback(result);
+        });
     }
 }
