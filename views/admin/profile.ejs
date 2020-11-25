@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title><%= profile.uname %>| Profile</title>
+    <title><%= username %> | Profile</title>
 
     <!-- Fontfaces CSS-->
     <link href="/abc/css/font-face.css" rel="stylesheet" media="all">
@@ -135,21 +135,21 @@
                                                 <p>You have <%= msg_count %> news message</p>
                                             </div>
 
-                                           <% msg.forEach( function(m){
-                                                if(m.status === 'unread'){ %>
+                                           <% for(var i=0; i < msg.length; i++){
+                                                if(msg[i].status === 'unread'){ %>
                                             <div class="mess__item">
                                                 <div class="image img-cir img-40">
                                                     <img src="/abc/images/icon/avatar-06.jpg" alt="Michelle Moreno" />
                                                 </div>
                                                 <div class="content">
-                                                    <h6><%= m.name %></h6>
-                                                    <p><%= m.body%></p>
+                                                    <h6><%= msg[i].name %></h6>
+                                                    <p><%= msg[i].body%></p>
                                                     <a href="">Read</a>
                                                 </div>
                                             </div>
                                             <%
                                                 };
-                                            }); 
+                                            }; 
                                             %>
                                             
                                             <div class="mess__footer">
@@ -165,22 +165,22 @@
                                                 <p>You have <%= email_count %> Notifications</p>
                                             </div>
 
-                                            <% email.forEach( function(e){
-                                                if(e.status === 'unread'){ %>
+                                            <% for(var i=0; i < email.length; i++){
+                                                if(email[i].status === 'unread'){ %>
                                             <div class="notifi__item">
                                                 <div class="bg-c1 img-cir img-40">
                                                     <i class="zmdi zmdi-email-open"></i>
                                                 </div>
                                                 <div class="content">
                                                     <p>You got a email notification</p>
-                                                    <span class="date"><h6><%= e.name %></h6>
-                                                        sub: <%= e.subject%>
+                                                    <span class="date"><h6><%= email[i].name %></h6>
+                                                        sub: <%= email[i].subject%>
                                                     </span>
                                                 </div>
                                             </div>
                                             <%
                                                 };
-                                            }); 
+                                            }; 
                                             %>
 
                                             <div class="notifi__footer">

@@ -63,6 +63,7 @@ router.get('/adminController', (req, res) => {
 router.post('/search', (req, res) => {
 	console.log(req.body);
 	main_controll.search(req.body.search, (results) => {
+		console.log(results);
 		res.json({
 			result : results
 		});
@@ -88,7 +89,8 @@ router.get('/profile', (req, res) => {
 				email_count: req.session.data.email_count,
 				msg: req.session.data.msg, 
 				msg_count: req.session.data.msg_count,
-				profile: result[0]
+				profile: result[0],
+				username: result[0].username
 			});
 	});
 });
@@ -108,6 +110,7 @@ router.get('/edit_profile/:id', (req, res) => {
 });
 router.post('/edit_profile/:id', (req, res) => {
 	main_controll.update(req.body, (status) => {
+		res.redirect('/admin/adminController');
 		console.log(status);
 	});
 });
@@ -282,7 +285,13 @@ router.get('/calendar', (req, res) => {
 	});
 });
 
-
+router.get('/message/:id', (req, res) => {
+	main_controll.getById(req.params.id, (result) => {
+		res.render('admin/message', { fname : req.session.user.username, to: result[0].username });
+	});
+	
+	console.log(req.params.id);
+});
 
 
 router.get('/logout', (req, res) => {

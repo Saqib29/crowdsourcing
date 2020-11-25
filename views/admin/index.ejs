@@ -186,8 +186,8 @@
                         <div class="header-wrap">
                             <!-- <form class="form-header" action="" method="POST"> -->
                                 <input class="au-input au-input--xl" type="text" name="search" id="search" placeholder="Search by name..." />
-
-                                <ul class="list-group" id="result"></ul>
+                                <br>
+                                
 
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
@@ -302,7 +302,9 @@
                 </div>
             </header>
             <!-- HEADER DESKTOP-->
+            <ul class="list-group" id="result" style="width: 350px; height: 30px; margin-left: 50px; margin-top: 80px;">
 
+            </ul>
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
@@ -464,6 +466,7 @@
     <script src="/abc/vendor/chartjs/Chart.bundle.min.js"></script>
     <script src="/abc/vendor/select2/select2.min.js">
     </script>
+    
 
     <!-- Main JS-->
     <script src="/abc/js/main.js"></script>
@@ -483,8 +486,7 @@
                     success: (result) => {
                         for (var i=0; i < result.length; i++){
                             $('#result').append(`<li class="list-group-item">${result[i].username}</li>`);
-                            //------------------>>  under the the search box ul tag see id=result
-                            }
+                        }
                     },
                     error: (err) => {
                         alert(err);
@@ -494,6 +496,7 @@
             });
         });
     </script>
+
 
 </body>
 
